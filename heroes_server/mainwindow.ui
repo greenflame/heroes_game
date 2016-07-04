@@ -14,19 +14,33 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="7,3">
     <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-      </property>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="8,2">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="textEdit_info">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>150</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
-     <widget class="QTextEdit" name="textEdit">
+     <widget class="QTextEdit" name="textEdit_log">
       <property name="minimumSize">
        <size>
         <width>250</width>
@@ -35,7 +49,7 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>250</width>
+        <width>1000000</width>
         <height>16777215</height>
        </size>
       </property>
@@ -57,15 +71,20 @@
    </property>
    <widget class="QMenu" name="menuDraw_test">
     <property name="title">
-     <string>draw test</string>
+     <string>Game</string>
     </property>
-    <addaction name="actionTest"/>
+    <addaction name="actionStart"/>
    </widget>
    <addaction name="menuDraw_test"/>
   </widget>
-  <action name="actionTest">
+  <action name="actionStart">
    <property name="text">
-    <string>test</string>
+    <string>Start</string>
+   </property>
+  </action>
+  <action name="actionLoad_map">
+   <property name="text">
+    <string>Load map</string>
    </property>
   </action>
  </widget>

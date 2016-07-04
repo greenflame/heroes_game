@@ -20,6 +20,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QTextEdit>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -27,11 +28,14 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionTest;
+    QAction *actionStart;
+    QAction *actionLoad_map;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout;
     QLabel *label;
-    QTextEdit *textEdit;
+    QTextEdit *textEdit_info;
+    QTextEdit *textEdit_log;
     QMenuBar *menuBar;
     QMenu *menuDraw_test;
 
@@ -40,27 +44,45 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(767, 538);
-        actionTest = new QAction(MainWindow);
-        actionTest->setObjectName(QStringLiteral("actionTest"));
+        actionStart = new QAction(MainWindow);
+        actionStart->setObjectName(QStringLiteral("actionStart"));
+        actionLoad_map = new QAction(MainWindow);
+        actionLoad_map->setObjectName(QStringLiteral("actionLoad_map"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
 
-        horizontalLayout->addWidget(label);
+        verticalLayout->addWidget(label);
 
-        textEdit = new QTextEdit(centralWidget);
-        textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setMinimumSize(QSize(250, 0));
-        textEdit->setMaximumSize(QSize(250, 16777215));
+        textEdit_info = new QTextEdit(centralWidget);
+        textEdit_info->setObjectName(QStringLiteral("textEdit_info"));
+        textEdit_info->setMinimumSize(QSize(0, 150));
 
-        horizontalLayout->addWidget(textEdit);
+        verticalLayout->addWidget(textEdit_info);
 
+        verticalLayout->setStretch(0, 8);
+        verticalLayout->setStretch(1, 2);
+
+        horizontalLayout->addLayout(verticalLayout);
+
+        textEdit_log = new QTextEdit(centralWidget);
+        textEdit_log->setObjectName(QStringLiteral("textEdit_log"));
+        textEdit_log->setMinimumSize(QSize(250, 0));
+        textEdit_log->setMaximumSize(QSize(1000000, 16777215));
+
+        horizontalLayout->addWidget(textEdit_log);
+
+        horizontalLayout->setStretch(0, 7);
+        horizontalLayout->setStretch(1, 3);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -71,7 +93,7 @@ public:
         MainWindow->setMenuBar(menuBar);
 
         menuBar->addAction(menuDraw_test->menuAction());
-        menuDraw_test->addAction(actionTest);
+        menuDraw_test->addAction(actionStart);
 
         retranslateUi(MainWindow);
 
@@ -81,9 +103,10 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
-        actionTest->setText(QApplication::translate("MainWindow", "test", 0));
+        actionStart->setText(QApplication::translate("MainWindow", "Start", 0));
+        actionLoad_map->setText(QApplication::translate("MainWindow", "Load map", 0));
         label->setText(QApplication::translate("MainWindow", "TextLabel", 0));
-        menuDraw_test->setTitle(QApplication::translate("MainWindow", "draw test", 0));
+        menuDraw_test->setTitle(QApplication::translate("MainWindow", "Game", 0));
     } // retranslateUi
 
 };

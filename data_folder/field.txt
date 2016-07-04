@@ -1,0 +1,3 @@
+15 10
+alex, 1, 0, pikeman, 10
+anton, 3, 2, pikeman, 10

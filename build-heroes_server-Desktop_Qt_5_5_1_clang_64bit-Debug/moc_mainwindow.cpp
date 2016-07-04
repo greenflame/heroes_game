@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[12];
-    char stringdata0[142];
+    QByteArrayData data[11];
+    char stringdata0[112];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,23 +30,21 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 23), // "on_actionTest_triggered"
-QT_MOC_LITERAL(2, 35, 0), // ""
-QT_MOC_LITERAL(3, 36, 11), // "renderField"
-QT_MOC_LITERAL(4, 48, 8), // "cellSize"
-QT_MOC_LITERAL(5, 57, 14), // "printGameState"
-QT_MOC_LITERAL(6, 72, 13), // "generateUnits"
-QT_MOC_LITERAL(7, 86, 19), // "generateActionQueue"
-QT_MOC_LITERAL(8, 106, 11), // "troopExists"
-QT_MOC_LITERAL(9, 118, 8), // "position"
-QT_MOC_LITERAL(10, 127, 8), // "getTroop"
-QT_MOC_LITERAL(11, 136, 5) // "Troop"
+QT_MOC_LITERAL(1, 11, 24), // "on_actionStart_triggered"
+QT_MOC_LITERAL(2, 36, 0), // ""
+QT_MOC_LITERAL(3, 37, 10), // "writeInput"
+QT_MOC_LITERAL(4, 48, 5), // "Field"
+QT_MOC_LITERAL(5, 54, 1), // "f"
+QT_MOC_LITERAL(6, 56, 10), // "readOutput"
+QT_MOC_LITERAL(7, 67, 6), // "Field&"
+QT_MOC_LITERAL(8, 74, 8), // "updateUi"
+QT_MOC_LITERAL(9, 83, 16), // "updateTroopsInfo"
+QT_MOC_LITERAL(10, 100, 11) // "renderField"
 
     },
-    "MainWindow\0on_actionTest_triggered\0\0"
-    "renderField\0cellSize\0printGameState\0"
-    "generateUnits\0generateActionQueue\0"
-    "troopExists\0position\0getTroop\0Troop"
+    "MainWindow\0on_actionStart_triggered\0"
+    "\0writeInput\0Field\0f\0readOutput\0Field&\0"
+    "updateUi\0updateTroopsInfo\0renderField"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +54,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,22 +62,20 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x0a /* Public */,
-       3,    1,   50,    2, 0x0a /* Public */,
-       5,    0,   53,    2, 0x0a /* Public */,
-       6,    0,   54,    2, 0x0a /* Public */,
-       7,    0,   55,    2, 0x0a /* Public */,
-       8,    1,   56,    2, 0x0a /* Public */,
-      10,    1,   59,    2, 0x0a /* Public */,
+       1,    0,   44,    2, 0x0a /* Public */,
+       3,    1,   45,    2, 0x0a /* Public */,
+       6,    1,   48,    2, 0x0a /* Public */,
+       8,    1,   51,    2, 0x0a /* Public */,
+       9,    1,   54,    2, 0x0a /* Public */,
+      10,    1,   57,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QSize,    4,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Bool, QMetaType::QPoint,    9,
-    0x80000000 | 11, QMetaType::QPoint,    9,
+    QMetaType::Void, 0x80000000 | 4,    5,
+    QMetaType::Void, 0x80000000 | 7,    5,
+    QMetaType::Void, 0x80000000 | 4,    5,
+    QMetaType::Void, 0x80000000 | 4,    5,
+    QMetaType::Void, 0x80000000 | 4,    5,
 
        0        // eod
 };
@@ -90,15 +86,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         MainWindow *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_actionTest_triggered(); break;
-        case 1: _t->renderField((*reinterpret_cast< QSize(*)>(_a[1]))); break;
-        case 2: _t->printGameState(); break;
-        case 3: _t->generateUnits(); break;
-        case 4: _t->generateActionQueue(); break;
-        case 5: { bool _r = _t->troopExists((*reinterpret_cast< QPoint(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 6: { Troop _r = _t->getTroop((*reinterpret_cast< QPoint(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< Troop*>(_a[0]) = _r; }  break;
+        case 0: _t->on_actionStart_triggered(); break;
+        case 1: _t->writeInput((*reinterpret_cast< const Field(*)>(_a[1]))); break;
+        case 2: _t->readOutput((*reinterpret_cast< Field(*)>(_a[1]))); break;
+        case 3: _t->updateUi((*reinterpret_cast< const Field(*)>(_a[1]))); break;
+        case 4: _t->updateTroopsInfo((*reinterpret_cast< const Field(*)>(_a[1]))); break;
+        case 5: _t->renderField((*reinterpret_cast< const Field(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -129,13 +122,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 6;
     }
     return _id;
 }

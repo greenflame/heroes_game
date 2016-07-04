@@ -1,0 +1,6 @@
+2
+[id: 0, owner: alex, position: (2, 2), unit: Pikeman, count: 2, health: 13]
+[id: 1, owner: anton, position: (2, 2), unit: Pikeman, count: 9, health: 87]
+
+15
+1 0 1 0 1 0 0 1 1 0 1 0 0 1 0

@@ -29,7 +29,7 @@ int main() {
 
     ofstream fout("output.txt");
 
-    fout << "2 2 2 2" << endl;
+    fout << "2 123 3 2" << endl;
 
     fout.close();
 }

@@ -18,24 +18,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionStart_triggered()
 {
+    stop = false;
     Field f(path + "field.txt");
 
     while (!f.isGameEnd())
     {
         // Write input
+        QFile::remove(path + "input.txt");
+        QFile::remove(path + "output.txt");
+        QFile::copy("input.txt", path + "input.txt");
+        QFile::copy("output.txt", path + "output.txt");
+        QFile::remove("input.txt");
+        QFile::remove("output.txt");
+
         writeInput(f);
 
         // Start programm
-        QString programmName = f.getTroops().at(f.getActionQueue().first()).getOwner();
+        QString programmName = path + f.getTroops().at(f.getTroopIndex(f.getActionQueue().first())).getOwner();
 
         QProcess p(this);
-        p.start(path + programmName);
-        p.waitForStarted(1000);
-
-        if (p.state() == QProcess::Running)
-        {
-            p.waitForFinished(2000);
-        }
+        p.start(programmName);
+        p.waitForFinished(2000);
 
         // Read output
         readOutput(f);
@@ -46,7 +49,18 @@ void MainWindow::on_actionStart_triggered()
         // Sleep
         QThread::msleep(1000);
         qApp->processEvents();
+
+        // Interrupt
+        if (stop)
+        {
+            break;
+        }
     }
+}
+
+void MainWindow::on_actionStop_triggered()
+{
+    stop = true;
 }
 
 void MainWindow::renderField(const Field &f)
@@ -124,7 +138,7 @@ void MainWindow::updateTroopsInfo(const Field &f)
 
 void MainWindow::writeInput(const Field &f)
 {
-    QFile file(path + "input.txt");
+    QFile file("input.txt");
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream out(&file);
 
@@ -134,10 +148,23 @@ void MainWindow::writeInput(const Field &f)
 
     for (int i = 0; i < f.getTroops().length(); i++)
     {
-        out << f.getTroops().at(i).toString();
+        Troop troop = f.getTroops().at(i);
+
+        out << troop.getId();
+        endl(out);
+        out << troop.getOwner();
+        endl(out);
+        out << troop.getPosition().x();
+        endl(out);
+        out << troop.getPosition().y();
+        endl(out);
+        out << troop.getUnit().name;
+        endl(out);
+        out << troop.getCount();
+        endl(out);
+        out << troop.getHealth();
         endl(out);
     }
-    endl(out);
 
     // Action queue
     out << f.getActionQueue().length();
@@ -145,20 +172,16 @@ void MainWindow::writeInput(const Field &f)
 
     for (int i = 0; i < f.getActionQueue().length(); i++)
     {
-        if (i)
-        {
-            out << " ";
-        }
         out << f.getActionQueue().at(i);
+        endl(out);
     }
-    endl(out);
 
     file.close();
 }
 
 void MainWindow::readOutput(Field &f)
 {
-    QFile file(path + "output.txt");
+    QFile file("output.txt");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QTextStream in(&file);
 
@@ -171,6 +194,7 @@ void MainWindow::readOutput(Field &f)
 
     QString log;
     f.action(move, attack, log);
+    ui->textEdit_log->insertPlainText(log);
 
     file.close();
 }

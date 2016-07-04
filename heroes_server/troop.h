@@ -16,7 +16,7 @@ public:
 
     QString toString() const;
 
-    void attack(Troop &aim);
+    void attack(Troop &aim, QString &log);
 
     int getId() const;
     QString getOwner() const;

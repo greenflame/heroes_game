@@ -30,6 +30,7 @@ class Ui_MainWindow
 public:
     QAction *actionStart;
     QAction *actionLoad_map;
+    QAction *actionStop;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
@@ -48,6 +49,8 @@ public:
         actionStart->setObjectName(QStringLiteral("actionStart"));
         actionLoad_map = new QAction(MainWindow);
         actionLoad_map->setObjectName(QStringLiteral("actionLoad_map"));
+        actionStop = new QAction(MainWindow);
+        actionStop->setObjectName(QStringLiteral("actionStop"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -94,6 +97,7 @@ public:
 
         menuBar->addAction(menuDraw_test->menuAction());
         menuDraw_test->addAction(actionStart);
+        menuDraw_test->addAction(actionStop);
 
         retranslateUi(MainWindow);
 
@@ -105,6 +109,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         actionStart->setText(QApplication::translate("MainWindow", "Start", 0));
         actionLoad_map->setText(QApplication::translate("MainWindow", "Load map", 0));
+        actionStop->setText(QApplication::translate("MainWindow", "Stop", 0));
         label->setText(QApplication::translate("MainWindow", "TextLabel", 0));
         menuDraw_test->setTitle(QApplication::translate("MainWindow", "Game", 0));
     } // retranslateUi

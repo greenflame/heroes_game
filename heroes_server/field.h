@@ -5,6 +5,7 @@
 #include <QList>
 #include <QSet>
 #include <QFile>
+#include <QRect>
 
 #include "unit.h"
 #include "troop.h"
@@ -36,7 +37,7 @@ private:
     void checkForDeath();
     void loadFromFile(QString fileName);
 
-    bool moveTroop(int id, QPoint destination, QString &log);
+    bool moveTroop(Troop &troop, QPoint destination, QString &log);
 
     QSize size;
     QList<Troop> troops;

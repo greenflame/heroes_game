@@ -11,6 +11,7 @@
 #include <QThread>
 #include <QProcess>
 #include <QFile>
+#include <QDir>
 
 #include "unit.h"
 #include "troop.h"
@@ -31,10 +32,10 @@ public:
 public slots:
     // View
     void on_actionStart_triggered();
+    void on_actionStop_triggered();
 
     void writeInput(const Field &f);
     void readOutput(Field &f);
-
 
     void updateUi(const Field &f);
     void updateTroopsInfo(const Field &f);
@@ -44,6 +45,8 @@ private:
 
     QString path;
     QSize cellSize;
+
+    bool stop;
 };
 
 #endif // MAINWINDOW_H

@@ -135,12 +135,20 @@ bool Field::isGameEnd() const
 
 void Field::action(QPoint move, QPoint attack, QString &log)
 {
-    int ind = getTroopIndex(actionQueue.takeFirst());
+    Troop &troop = troops[getTroopIndex(actionQueue.takeFirst())];
 
-    moveTroop(ind, move, log);
+    moveTroop(troop, move, log);
+
     if (troopExists(attack))
     {
-        troops[ind].attack(troops[getTroopIndex(attack)]);
+        troop.attack(troops[getTroopIndex(attack)], log);
+    }
+    else
+    {
+        log.append(QString("%1 attack error (%2, %3). Noody is here.\n")
+                   .arg(troop.unit.name)
+                   .arg(attack.x())
+                   .arg(attack.y()));
     }
 
     checkForDeath();
@@ -184,13 +192,38 @@ void Field::loadFromFile(QString fileName)
     input.close();
 }
 
-bool Field::moveTroop(int id, QPoint destination, QString &log)
+bool Field::moveTroop(Troop &troop, QPoint destination, QString &log)
 {
-    int ind = getTroopIndex(id);
+    if (troopExists(destination))
+    {
+        log.append(QString("Error moving %1 to (%2, %3). Position is already taken.\n")
+                   .arg(troop.getUnit().name)
+                   .arg(destination.x())
+                   .arg(destination.y()));
+        return false;
+    }
 
-    troops[ind].position = destination;
+    if (!QRect(QPoint(), size).contains(destination))
+    {
+        log.append(QString("Error moving %1 to (%2, %3). Position is out of map.\n")
+                   .arg(troop.getUnit().name)
+                   .arg(destination.x())
+                   .arg(destination.y()));
+        return false;
+    }
+
+    if ((troop.position - destination).manhattanLength() > troop.unit.speed)
+    {
+        log.append(QString("Error moving %1 to (%2, %3). Position is too far.\n")
+                   .arg(troop.getUnit().name)
+                   .arg(destination.x())
+                   .arg(destination.y()));
+        return false;
+    }
+
+    troop.position = destination;
     log.append(QString("%1 moved to (%2, %3)\n")
-               .arg(troops[ind].getUnit().name)
+               .arg(troop.unit.name)
                .arg(destination.x())
                .arg(destination.y()));
 

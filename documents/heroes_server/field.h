@@ -31,8 +31,6 @@ public:
     QList<int> getActionQueue() const;
 
 private:
-    void init();
-
     void regenerateActionQueue();
     void updateActionQueue();
 

@@ -2,12 +2,15 @@
 
 Field::Field()
 {
-    init();
+    size = QSize(15, 10);
+    actionQueueLength = 15;
 }
 
 Field::Field(QString fileName)
 {
-    init();
+    size = QSize(15, 10);           // Copy!!!
+    actionQueueLength = 15;
+
     loadFromFile(fileName);
 }
 
@@ -31,12 +34,6 @@ QSize Field::getSize() const
 QList<int> Field::getActionQueue() const
 {
     return actionQueue.mid(0, actionQueueLength);
-}
-
-void Field::init()
-{
-    size = QSize(15, 10);
-    actionQueueLength = 15;
 }
 
 QList<Troop> Field::getTroops() const

@@ -36,16 +36,8 @@ void MainWindow::on_actionStart_triggered()
         // Start programm
         QString programmName = path + f.getTroops().at(f.getTroopIndex(f.getActionQueue().first())).getOwner();
 
-
         QProcess p(this);
-        if (programmName.indexOf("anton") != -1)
-        {
-            p.start("/usr/local/Cellar/mono/4.2.3.4/bin/mono", QStringList() << programmName);
-        }
-        else
-        {
-            p.start(programmName);
-        }
+        p.start(programmName);
         p.waitForFinished(2000);
 
         // Read output

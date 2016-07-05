@@ -7,17 +7,6 @@
 
 #include "unit.h"
 
-enum AttackVerdict {
-
-};
-
-class AttackResult {
-public:
-    AttackVerdict verdict;
-    int damage;
-    int died;
-};
-
 class Field;
 
 class Troop

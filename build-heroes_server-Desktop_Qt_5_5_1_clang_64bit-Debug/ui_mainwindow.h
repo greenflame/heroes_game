@@ -79,8 +79,10 @@ public:
 
         textEdit_log = new QTextEdit(centralWidget);
         textEdit_log->setObjectName(QStringLiteral("textEdit_log"));
-        textEdit_log->setMinimumSize(QSize(250, 0));
+        textEdit_log->setMinimumSize(QSize(350, 0));
         textEdit_log->setMaximumSize(QSize(1000000, 16777215));
+        textEdit_log->setContextMenuPolicy(Qt::PreventContextMenu);
+        textEdit_log->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
 
         horizontalLayout->addWidget(textEdit_log);
 

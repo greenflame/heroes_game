@@ -622,10 +622,25 @@ moc_mainwindow.cpp: ../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QMa
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qset.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QThread \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QProcess \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QDir \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qdir.h \
 		../heroes_server/unit.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QMap \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmap.h \
 		../heroes_server/troop.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QPoint \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../heroes_server/field.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QSize \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QList \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QRect \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
 		../heroes_server/mainwindow.h
 	/Users/Alexander/Qt/5.5/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/Alexander/Qt/5.5/clang_64/mkspecs/macx-clang -I/Users/Alexander/Desktop/heroes_game/heroes_server -I/Users/Alexander/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/Alexander/Qt/5.5/clang_64/lib/QtGui.framework/Headers -I/Users/Alexander/Qt/5.5/clang_64/lib/QtCore.framework/Headers -I. -F/Users/Alexander/Qt/5.5/clang_64/lib ../heroes_server/mainwindow.h -o moc_mainwindow.cpp
 
@@ -666,10 +681,25 @@ main.o: ../heroes_server/main.cpp ../heroes_server/mainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qset.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QThread \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QProcess \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QDir \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qdir.h \
 		../heroes_server/unit.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QMap \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmap.h \
 		../heroes_server/troop.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QPoint \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../heroes_server/field.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QSize \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QList \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QRect \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../heroes_server/main.cpp
@@ -691,16 +721,33 @@ mainwindow.o: ../heroes_server/mainwindow.cpp ../heroes_server/mainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qset.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QThread \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qthread.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QProcess \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QDir \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qdir.h \
 		../heroes_server/unit.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QMap \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmap.h \
 		../heroes_server/troop.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QPoint \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../heroes_server/field.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QSize \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QList \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QRect \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../heroes_server/mainwindow.cpp
 
 unit.o: ../heroes_server/unit.cpp ../heroes_server/unit.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QMap \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unit.o ../heroes_server/unit.cpp
 
 troop.o: ../heroes_server/troop.cpp ../heroes_server/troop.h \
@@ -710,10 +757,32 @@ troop.o: ../heroes_server/troop.cpp ../heroes_server/troop.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QTime \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
-		../heroes_server/unit.h
+		../heroes_server/unit.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QMap \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o troop.o ../heroes_server/troop.cpp
 
-field.o: ../heroes_server/field.cpp ../heroes_server/field.h
+field.o: ../heroes_server/field.cpp ../heroes_server/field.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QSize \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qsize.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QList \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QSet \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qset.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QRect \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		../heroes_server/unit.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QMap \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmap.h \
+		../heroes_server/troop.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QPoint \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QTime \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qdatetime.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o field.o ../heroes_server/field.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 

@@ -43,7 +43,7 @@
      <widget class="QTextEdit" name="textEdit_log">
       <property name="minimumSize">
        <size>
-        <width>350</width>
+        <width>250</width>
         <height>0</height>
        </size>
       </property>
@@ -52,12 +52,6 @@
         <width>1000000</width>
         <height>16777215</height>
        </size>
-      </property>
-      <property name="contextMenuPolicy">
-       <enum>Qt::PreventContextMenu</enum>
-      </property>
-      <property name="sizeAdjustPolicy">
-       <enum>QAbstractScrollArea::AdjustToContents</enum>
       </property>
      </widget>
     </item>

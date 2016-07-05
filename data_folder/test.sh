@@ -1,0 +1,1 @@
+mono /Users/Alexander/Desktop/heroes_game/data_folder/anton

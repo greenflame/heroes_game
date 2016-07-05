@@ -25,7 +25,7 @@ QMap<QString, Unit> Unit::all()
     pikeman.movement_type = WALKING;
     pikeman.size = 1;
     pikeman.cost = 60;
-    units.insert("Pikeman", pikeman);
+    units.insert("pikeman", pikeman);
 
     Unit halberdier;
     halberdier.name = "Halberdier";
@@ -43,7 +43,7 @@ QMap<QString, Unit> Unit::all()
     halberdier.movement_type = WALKING;
     halberdier.size = 1;
     halberdier.cost = 75;
-    units.insert("Halberdier", halberdier);
+    units.insert("halberdier", halberdier);
 
     Unit archer;
     archer.name = "Archer";
@@ -61,7 +61,7 @@ QMap<QString, Unit> Unit::all()
     archer.movement_type = WALKING;
     archer.size = 1;
     archer.cost = 100;
-    units.insert("Archer", archer);
+    units.insert("archer", archer);
 
     Unit marksman;
     marksman.name = "Marksman";
@@ -79,7 +79,7 @@ QMap<QString, Unit> Unit::all()
     marksman.movement_type = WALKING;
     marksman.size = 1;
     marksman.cost = 150;
-    units.insert("Marksman", marksman);
+    units.insert("marksman", marksman);
 
     Unit griffin;
     griffin.name = "Griffin";
@@ -97,7 +97,7 @@ QMap<QString, Unit> Unit::all()
     griffin.movement_type = FLYING;
     griffin.size = 2;
     griffin.cost = 200;
-    units.insert("Griffin", griffin);
+    units.insert("griffin", griffin);
 
     Unit royal_griffin;
     royal_griffin.name = "Royal Griffin";
@@ -133,7 +133,7 @@ QMap<QString, Unit> Unit::all()
     swordsman.movement_type = WALKING;
     swordsman.size = 1;
     swordsman.cost = 300;
-    units.insert("Swordsman", swordsman);
+    units.insert("swordsman", swordsman);
 
     Unit crusader;
     crusader.name = "Crusader";
@@ -151,7 +151,7 @@ QMap<QString, Unit> Unit::all()
     crusader.movement_type = WALKING;
     crusader.size = 1;
     crusader.cost = 400;
-    units.insert("Crusader", crusader);
+    units.insert("crusader", crusader);
 
     Unit monk;
     monk.name = "Monk";
@@ -169,7 +169,7 @@ QMap<QString, Unit> Unit::all()
     monk.movement_type = WALKING;
     monk.size = 1;
     monk.cost = 400;
-    units.insert("Monk", monk);
+    units.insert("monk", monk);
 
     Unit zealot;
     zealot.name = "Zealot";
@@ -187,7 +187,7 @@ QMap<QString, Unit> Unit::all()
     zealot.movement_type = WALKING;
     zealot.size = 1;
     zealot.cost = 450;
-    units.insert("Zealot", zealot);
+    units.insert("zealot", zealot);
 
     Unit cavalier;
     cavalier.name = "Cavalier";
@@ -205,7 +205,7 @@ QMap<QString, Unit> Unit::all()
     cavalier.movement_type = WALKING;
     cavalier.size = 2;
     cavalier.cost = 1000;
-    units.insert("Cavalier", cavalier);
+    units.insert("cavalier", cavalier);
 
     Unit champion;
     champion.name = "Champion";
@@ -223,7 +223,7 @@ QMap<QString, Unit> Unit::all()
     champion.movement_type = WALKING;
     champion.size = 2;
     champion.cost = 1200;
-    units.insert("Champion", champion);
+    units.insert("champion", champion);
 
     Unit angel;
     angel.name = "Angel";
@@ -241,7 +241,7 @@ QMap<QString, Unit> Unit::all()
     angel.movement_type = FLYING;
     angel.size = 1;
     angel.cost = 3000;
-    units.insert("Angel", angel);
+    units.insert("angel", angel);
 
     Unit archangel;
     archangel.name = "Archangel";
@@ -259,7 +259,7 @@ QMap<QString, Unit> Unit::all()
     archangel.movement_type = FLYING;
     archangel.size = 2;
     archangel.cost = 5000;
-    units.insert("Archangel", archangel);
+    units.insert("archangel", archangel);
 
     return units;
 }

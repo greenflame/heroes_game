@@ -15,7 +15,7 @@ Troop::Troop(QString owner, QPoint position, Unit unit, int count)
 
 QString Troop::toString() const
 {
-    return QString("Id: %1, owner: %2, position: (%3, %4), unit: %5, count: %6, health: %7.")
+    return QString("Id: %1, owner: %2, position: (%3, %4), unit: %5, count: %6, health: %7")
             .arg(id)
             .arg(owner)
             .arg(position.x())

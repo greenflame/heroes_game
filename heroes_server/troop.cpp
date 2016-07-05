@@ -3,8 +3,6 @@
 
 Troop::Troop(QString owner, QPoint position, Unit unit, int count)
 {
-    this->id = nextId();
-
     this->owner = owner;
     this->position = position;
     this->unit = unit;
@@ -13,10 +11,18 @@ Troop::Troop(QString owner, QPoint position, Unit unit, int count)
     this->health = count * unit.health;
 }
 
+bool Troop::operator ==(const Troop &other) const
+{
+    return owner == other.owner &&
+            position == other.position &&
+            unit == other.unit &&
+            count == other.count &&
+            health == other.health;
+}
+
 QString Troop::toString() const
 {
-    return QString("Id: %1, owner: %2, position: (%3, %4), unit: %5, count: %6, health: %7.")
-            .arg(id)
+    return QString("Owner: %2, position: (%3, %4), unit: %5, count: %6, health: %7.")
             .arg(owner)
             .arg(position.x())
             .arg(position.y())
@@ -81,12 +87,6 @@ float Troop::randomFloat()
     return (float)(qrand() % 1000) / 1000.0;
 }
 
-int Troop::nextId()
-{
-    static int nextId = 0;
-    return nextId++;
-}
-
 int Troop::getHealth() const
 {
     return health;
@@ -110,9 +110,4 @@ QPoint Troop::getPosition() const
 QString Troop::getOwner() const
 {
     return owner;
-}
-
-int Troop::getId() const
-{
-    return id;
 }

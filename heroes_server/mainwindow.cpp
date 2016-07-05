@@ -34,15 +34,14 @@ void MainWindow::on_actionStart_triggered()
         writeInput(f);
 
         // Start programm
-        QString programmName = path + f.getTroops().at(f.getTroopIndex(f.getActionQueue().first())).getOwner();
-
+        QString programmName = path + f.getActionQueue().first().getOwner();
 
         QProcess p(this);
-        if (programmName.indexOf("anton") != -1)
-        {
-            p.start("/usr/local/Cellar/mono/4.2.3.4/bin/mono", QStringList() << programmName);
-        }
-        else
+//        if (programmName.indexOf("anton") != -1)
+//        {
+//            p.start("/usr/local/Cellar/mono/4.2.3.4/bin/mono", QStringList() << programmName);
+//        }
+//        else
         {
             p.start(programmName);
         }
@@ -95,7 +94,7 @@ void MainWindow::renderField(const Field &f)
 
             if (f.troopExists(QPoint(i, j)))
             {
-                Troop curTroop = f.getTroops().at(f.getTroopIndex(QPoint(i, j)));
+                Troop curTroop = f.getTroop(QPoint(i, j));
 
                 // Miniature
                 QImage img(path + "pictures/" + curTroop.getUnit().picture);
@@ -140,7 +139,8 @@ void MainWindow::updateTroopsInfo(const Field &f)
     ui->textEdit_info->append("");
     for (int i = 0; i < f.getActionQueue().length(); i++)
     {
-        ui->textEdit_info->insertPlainText(QString::number(f.getActionQueue().at(i)) + " ");
+        int index = f.getTroops().indexOf(f.getActionQueue().at(i));
+        ui->textEdit_info->insertPlainText(QString::number(index) + " ");
     }
 }
 
@@ -158,10 +158,6 @@ void MainWindow::writeInput(const Field &f)
     {
         Troop troop = f.getTroops().at(i);
 
-        out << troop.getId();
-        endl(out);
-        out << troop.getOwner();
-        endl(out);
         out << troop.getPosition().x();
         endl(out);
         out << troop.getPosition().y();
@@ -174,13 +170,47 @@ void MainWindow::writeInput(const Field &f)
         endl(out);
     }
 
+    QList<Troop> playerTroops, enemyTroops;
+
+    for (int i = 0; i < f.getTroops().length(); i++)
+    {
+        if (f.getTroops().at(i).getOwner() == f.getActionQueue().first().getOwner())
+        {
+            playerTroops.append(f.getTroops().at(i));
+        }
+        else
+        {
+            enemyTroops.append(f.getTroops().at(i));
+        }
+    }
+
+    // Player troops
+    out << playerTroops.length();
+    endl(out);
+
+    for (int i = 0; i < playerTroops.length(); i++)
+    {
+        out << f.getTroops().indexOf(playerTroops.at(i));
+        endl(out);
+    }
+
+    // Enemy troops
+    out << enemyTroops.length();
+    endl(out);
+
+    for (int i = 0; i < enemyTroops.length(); i++)
+    {
+        out << f.getTroops().indexOf(enemyTroops.at(i));
+        endl(out);
+    }
+
     // Action queue
     out << f.getActionQueue().length();
     endl(out);
 
     for (int i = 0; i < f.getActionQueue().length(); i++)
     {
-        out << f.getActionQueue().at(i);
+        out << f.getTroops().indexOf(f.getActionQueue().at(i));
         endl(out);
     }
 

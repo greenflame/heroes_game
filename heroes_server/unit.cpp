@@ -5,6 +5,25 @@ Unit::Unit()
 
 }
 
+bool Unit::operator ==(const Unit &other) const
+{
+    return name == other.name &&
+        picture == other.picture &&
+        faction == other.faction &&
+        level == other.level &&
+        upgrade == other.upgrade &&
+        attack == other.attack &&
+        defence == other.defence &&
+        damage_from == other.damage_from &&
+        damage_to == other.damage_to &&
+        attack_type == other.attack_type &&
+        health == other.health &&
+        speed == other.speed &&
+        movement_type == other.movement_type &&
+        size == other.size &&
+        cost == other.cost;
+}
+
 QMap<QString, Unit> Unit::all()
 {
     QMap<QString, Unit> units;

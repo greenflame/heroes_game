@@ -19,16 +19,14 @@ public:
     void addTroop(Troop troop);
 
     bool troopExists(QPoint position) const;
-    int getTroopIndex(QPoint position) const;
-    bool troopExists(int id) const;
-    int getTroopIndex(int id) const;
+    Troop getTroop(QPoint position) const;
 
     void action(QPoint move, QPoint attack, QString &log);
     bool isGameEnd() const;
 
     QSize getSize() const;
     QList<Troop> getTroops() const;
-    QList<int> getActionQueue() const;
+    QList<Troop> getActionQueue() const;    // For externall use
 
 private:
     void init();
@@ -43,7 +41,7 @@ private:
 
     QSize size;
     QList<Troop> troops;
-    QList<int> actionQueue;
+    QList<Troop*> actionQueue;
     int actionQueueLength;
 };
 

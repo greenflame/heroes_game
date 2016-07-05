@@ -18,6 +18,9 @@ class Unit
 {
 public:
     Unit();
+
+    bool operator ==(const Unit &other) const;
+
     static QMap<QString, Unit> all();
 
     QString name;

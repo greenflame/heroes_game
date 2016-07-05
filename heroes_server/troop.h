@@ -25,11 +25,12 @@ class Troop
 public:
     Troop(QString owner, QPoint position, Unit unit, int count);
 
+    bool operator ==(const Troop &other) const;
+
     QString toString() const;
 
     void attack(Troop &aim, QString &log);
 
-    int getId() const;
     QString getOwner() const;
     QPoint getPosition() const;
     Unit getUnit() const;
@@ -42,7 +43,6 @@ private:
     static float randomFloat();
     static int nextId();
 
-    int id;
     QString owner;
 
     QPoint position;

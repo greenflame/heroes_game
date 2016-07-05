@@ -10,9 +10,7 @@ using namespace std;
 class Troop {
 public:
     Troop() {}
-    Troop(int id, string owner, int x, int y, string type, int count, int health) {
-        this->id = id;
-        this->owner = owner;
+    Troop(int x, int y, string type, int count, int health) {
         this->x = x;
         this->y = y;
         this->type = type;
@@ -20,8 +18,6 @@ public:
         this->health = health;
     }
 
-    int id;
-    string owner;
     int x;
     int y;
     string type;
@@ -49,8 +45,28 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         Troop troop;
-        cin >> troop.id >> troop.owner >> troop.x >> troop.y >> troop.type >> troop.count >> troop.health;
+        cin >> troop.x >> troop.y >> troop.type >> troop.count >> troop.health;
         troops.push_back(troop);
+    }
+
+    // Read my troops
+    vector<int> myTroops;
+
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        myTroops.push_back(x);
+    }
+
+    // read enemy troops
+    vector<int> enemyTroops;
+
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        enemyTroops.push_back(x);
     }
 
     // Read acton queue
@@ -64,27 +80,16 @@ int main() {
     }
 
     // Find my name and current troop
-    string myName = "";
-    Troop curTroop;
-
-    for (int i = 0; i < troops.size(); i++) {
-        if (troops[i].id == actionQueue[0]) {
-            myName = troops[i].owner;
-            curTroop = troops[i];
-            break;
-        }
-    }
+    Troop curTroop = troops[actionQueue[0]];
 
     // Find ain
     Troop aim;
     aim.x = -1000;
     aim.y = -1000;
-    for (int i = 0; i < troops.size(); i++) {
-        if (troops[i].owner != myName) {
-            Troop curAim = troops[i];
-            if (manhettanLength(curTroop, curAim) < manhettanLength(curTroop, aim)) {
-                aim = curAim;
-            }
+    for (int i = 0; i < enemyTroops.size(); i++) {
+        Troop curAim = troops[enemyTroops[i]];
+        if (manhettanLength(curTroop, curAim) < manhettanLength(curTroop, aim)) {
+            aim = curAim;
         }
     }
 

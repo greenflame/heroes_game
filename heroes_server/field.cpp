@@ -28,9 +28,21 @@ QSize Field::getSize() const
     return size;
 }
 
-QList<int> Field::getActionQueue() const
+QList<Troop> Field::getActionQueue() const
 {
-    return actionQueue.mid(0, actionQueueLength);
+    QList<Troop> result;
+
+    if (actionQueue.length() < actionQueueLength)
+    {
+        return result;
+    }
+
+    for (int i = 0; i < actionQueueLength; i++)
+    {
+        result.append(*actionQueue[i]);
+    }
+
+    return result;
 }
 
 void Field::init()
@@ -46,29 +58,19 @@ QList<Troop> Field::getTroops() const
 
 void Field::updateActionQueue()
 {
-    // Check for death
-    for (int i = 0; i < actionQueue.length(); i++)
-    {
-        if (!troopExists(actionQueue[i]))
-        {
-            actionQueue.removeAt(i);
-            i--;
-        }
-    }
-
     // Fill to length
     while (actionQueue.length() < actionQueueLength)
     {
-        QList<int> ids;
+        QList<Troop*> pointers;
 
         for (int i = 0; i < troops.length(); i++)
         {
-            ids.push_back(troops[i].getId());
+            pointers.push_back(&troops[i]);
         }
 
         for (int i = 0; i < troops.length(); i++)
         {
-            actionQueue.push_back(ids.takeAt(qrand() % ids.length()));
+            actionQueue.push_back(pointers.takeAt(qrand() % pointers.length()));
         }
     }
 }
@@ -86,43 +88,17 @@ bool Field::troopExists(QPoint position) const
     return false;
 }
 
-int Field::getTroopIndex(QPoint position) const
+Troop Field::getTroop(QPoint position) const
 {
     for (int i = 0; i < troops.length(); i++)
     {
         if (troops[i].getPosition() == position)
         {
-            return i;
+            return troops[i];
         }
     }
 
     throw "Position is empty";
-}
-
-int Field::getTroopIndex(int id) const
-{
-    for (int i = 0; i < troops.length(); i++)
-    {
-        if (troops[i].getId() == id)
-        {
-            return i;
-        }
-    }
-
-    throw "Invalid id";
-}
-
-bool Field::troopExists(int id) const
-{
-    for (int i = 0; i < troops.length(); i++)
-    {
-        if (troops[i].getId() == id)
-        {
-            return true;
-        }
-    }
-
-    return false;
 }
 
 bool Field::isGameEnd() const
@@ -138,13 +114,13 @@ bool Field::isGameEnd() const
 
 void Field::action(QPoint move, QPoint attack, QString &log)
 {
-    Troop &troop = troops[getTroopIndex(actionQueue.takeFirst())];
+    Troop &troop = *actionQueue.takeFirst();
 
     moveTroop(troop, move, log);
 
     if (troopExists(attack))
     {
-        troop.attack(troops[getTroopIndex(attack)], log);
+        troop.attack(troops[troops.indexOf(getTroop(attack))], log);
     }
     else
     {
@@ -164,6 +140,7 @@ void Field::checkForDeath()
     {
         if (troops[i].getHealth() == 0)
         {
+            actionQueue.removeAll(&troops[i]);
             troops.removeAt(i);
             i--;
         }

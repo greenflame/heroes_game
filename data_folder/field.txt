@@ -1,7 +1,6 @@
-15 10
-alex, 0, 2, Pikeman, 10
-anton, 14, 8, Pikeman, 10
-alex, 0, 4, Pikeman, 30
-anton, 14, 6, Pikeman, 30
-alex, 0, 6, Pikeman, 10
-anton, 14, 4, Pikeman, 10
+anton, 14, 8, Archer, 10
+alex, 0, 2, Archer, 10
+anton, 14, 6, Archer, 30
+alex, 0, 4, Archer, 30
+anton, 14, 4, Archer, 20
+alex, 0, 6, Archer, 20

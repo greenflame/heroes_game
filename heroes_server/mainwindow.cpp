@@ -23,51 +23,53 @@ void MainWindow::on_actionStart_triggered()
 
     while (!f.isGameEnd())
     {
-        // Write input
-        QFile::remove(path + "input.txt");
-        QFile::remove(path + "output.txt");
-        QFile::copy("input.txt", path + "input.txt");
-        QFile::copy("output.txt", path + "output.txt");
-        QFile::remove("input.txt");
-        QFile::remove("output.txt");
+        // Execute programm
+        QPoint move, attack;
+        executeProgramm(f, move, attack);
 
-        writeInput(f);
-
-        // Start programm
-        QString programmName = path + f.getActionQueue().first().getOwner();
-
-        QProcess p(this);
-//        if (programmName.indexOf("anton") != -1)
-//        {
-//            p.start("/usr/local/Cellar/mono/4.2.3.4/bin/mono", QStringList() << programmName);
-//        }
-//        else
-        {
-            p.start(programmName);
-        }
-        p.waitForFinished(2000);
-
-        // Read output
-        readOutput(f);
+        // Process model
+        QString log;
+        QList<QPoint> motinPath;
+        bool attackSuccess;
+        int damage, died;
+        f.action(move, attack, log, motinPath, attackSuccess, damage, died);
 
         // Render state
-        updateUi(f);
+        renderField(f);
+        updateTroopsInfo(f);
 
         // Sleep
-        QThread::msleep(1000);
+        QThread::msleep(1500);
         qApp->processEvents();
 
         // Interrupt
-        if (stop)
-        {
-            break;
-        }
+        if (stop) { break; }
     }
 }
 
 void MainWindow::on_actionStop_triggered()
 {
     stop = true;
+}
+
+void MainWindow::executeProgramm(const Field &f, QPoint &move, QPoint &attack)
+{
+    QFile::remove("input.txt");
+    QFile::remove("output.txt");
+
+    writeInput(f);
+
+    QString programmName = path + f.getActionQueue().first().getOwner();
+    if (programmName.indexOf("anton") != -1)
+    {
+        programmName = "/usr/local/Cellar/mono/4.2.3.4/bin/mono " + programmName;
+    }
+
+    QProcess p(this);
+    p.start(programmName);
+    p.waitForFinished(500);
+
+    readOutput(move, attack);
 }
 
 void MainWindow::renderField(const Field &f)
@@ -131,7 +133,7 @@ void MainWindow::updateTroopsInfo(const Field &f)
     ui->textEdit_info->append("Troops:");
     for (int i = 0; i < f.getTroops().length(); i++)
     {
-        ui->textEdit_info->append(f.getTroops().at(i).toString());
+        ui->textEdit_info->append(f.getTroops().at(i).toStringFull());
     }
     ui->textEdit_info->append("");
 
@@ -217,7 +219,7 @@ void MainWindow::writeInput(const Field &f)
     file.close();
 }
 
-void MainWindow::readOutput(Field &f)
+void MainWindow::readOutput(QPoint &move, QPoint &attack)
 {
     QFile file("output.txt");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -225,20 +227,15 @@ void MainWindow::readOutput(Field &f)
 
     int x, y;
     in >> x >> y;
-    QPoint move(x, y);
+    move = QPoint(x, y);
 
     in >> x >> y;
-    QPoint attack(x, y);
-
-    QString log;
-    f.action(move, attack, log);
-    ui->textEdit_log->insertPlainText(log);
+    attack = QPoint(x, y);
 
     file.close();
 }
 
-void MainWindow::updateUi(const Field &f)
+void MainWindow::renderMotion(const Field &f, const QList<QPoint> &motionPath)
 {
-    renderField(f);
-    updateTroopsInfo(f);
+
 }

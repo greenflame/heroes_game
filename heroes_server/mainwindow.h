@@ -34,12 +34,15 @@ public slots:
     void on_actionStart_triggered();
     void on_actionStop_triggered();
 
+    void executeProgramm(const Field &f, QPoint &move, QPoint &attack);
     void writeInput(const Field &f);
-    void readOutput(Field &f);
+    void readOutput(QPoint &move, QPoint &attack);
 
-    void updateUi(const Field &f);
-    void updateTroopsInfo(const Field &f);
+
+    void renderMotion(const Field &f, const QList<QPoint> &motionPath);
+
     void renderField(const Field &f);
+    void updateTroopsInfo(const Field &f);
 private:
     Ui::MainWindow *ui;
 

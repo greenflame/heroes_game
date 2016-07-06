@@ -4,19 +4,10 @@
 #include <QString>
 #include <QPoint>
 #include <QTime>
+#include <QtMath>
+#include <QDebug>
 
 #include "unit.h"
-
-enum AttackVerdict {
-
-};
-
-class AttackResult {
-public:
-    AttackVerdict verdict;
-    int damage;
-    int died;
-};
 
 class Field;
 
@@ -27,9 +18,10 @@ public:
 
     bool operator ==(const Troop &other) const;
 
-    QString toString() const;
+    QString toStringFull() const;
+    QString toStringShort() const;
 
-    void attack(Troop &aim, QString &log);
+    void attack(Troop &aim, QString &log, bool &attackSuccess, int &damage, int &died);
 
     QString getOwner() const;
     QPoint getPosition() const;
@@ -41,7 +33,7 @@ public:
 
 private:
     static float randomFloat();
-    static int nextId();
+    static float distance(const QPoint &p1, const QPoint &p2);
 
     QString owner;
 

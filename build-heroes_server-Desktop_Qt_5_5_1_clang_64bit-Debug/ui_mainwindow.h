@@ -35,8 +35,8 @@ public:
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
     QLabel *label;
-    QTextEdit *textEdit_info;
     QTextEdit *textEdit_log;
+    QTextEdit *textEdit_info;
     QMenuBar *menuBar;
     QMenu *menuDraw_test;
 
@@ -66,25 +66,25 @@ public:
 
         verticalLayout->addWidget(label);
 
-        textEdit_info = new QTextEdit(centralWidget);
-        textEdit_info->setObjectName(QStringLiteral("textEdit_info"));
-        textEdit_info->setMinimumSize(QSize(0, 150));
+        textEdit_log = new QTextEdit(centralWidget);
+        textEdit_log->setObjectName(QStringLiteral("textEdit_log"));
+        textEdit_log->setMinimumSize(QSize(0, 200));
 
-        verticalLayout->addWidget(textEdit_info);
+        verticalLayout->addWidget(textEdit_log);
 
         verticalLayout->setStretch(0, 8);
         verticalLayout->setStretch(1, 2);
 
         horizontalLayout->addLayout(verticalLayout);
 
-        textEdit_log = new QTextEdit(centralWidget);
-        textEdit_log->setObjectName(QStringLiteral("textEdit_log"));
-        textEdit_log->setMinimumSize(QSize(350, 0));
-        textEdit_log->setMaximumSize(QSize(1000000, 16777215));
-        textEdit_log->setContextMenuPolicy(Qt::PreventContextMenu);
-        textEdit_log->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        textEdit_info = new QTextEdit(centralWidget);
+        textEdit_info->setObjectName(QStringLiteral("textEdit_info"));
+        textEdit_info->setMinimumSize(QSize(250, 0));
+        textEdit_info->setMaximumSize(QSize(1000000, 16777215));
+        textEdit_info->setContextMenuPolicy(Qt::PreventContextMenu);
+        textEdit_info->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
 
-        horizontalLayout->addWidget(textEdit_log);
+        horizontalLayout->addWidget(textEdit_info);
 
         horizontalLayout->setStretch(0, 7);
         horizontalLayout->setStretch(1, 3);

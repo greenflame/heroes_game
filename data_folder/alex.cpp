@@ -93,14 +93,5 @@ int main() {
         }
     }
 
-    int dx = 0;
-    int dy = 0;
-    if (aim.x - curTroop.x != 0) {
-        dx = (aim.x - curTroop.x) / abs(aim.x - curTroop.x);
-    }
-    if (aim.y - curTroop.y != 0) {
-        dy = (aim.y - curTroop.y) / abs(aim.y - curTroop.y);
-    }
-
-    cout << curTroop.x + dx << " " << curTroop.y + dy << " " << aim.x << " " << aim.y << endl;
+    cout << aim.x << " " << aim.y << " " << aim.x << " " << aim.y << endl;
 }

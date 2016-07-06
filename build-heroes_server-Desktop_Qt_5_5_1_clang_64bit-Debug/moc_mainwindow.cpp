@@ -9,6 +9,7 @@
 #include "../heroes_server/mainwindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
+#include <QtCore/QList>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mainwindow.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -19,8 +20,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[12];
-    char stringdata0[136];
+    QByteArrayData data[17];
+    char stringdata0[194];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,20 +34,26 @@ QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
 QT_MOC_LITERAL(1, 11, 24), // "on_actionStart_triggered"
 QT_MOC_LITERAL(2, 36, 0), // ""
 QT_MOC_LITERAL(3, 37, 23), // "on_actionStop_triggered"
-QT_MOC_LITERAL(4, 61, 10), // "writeInput"
-QT_MOC_LITERAL(5, 72, 5), // "Field"
-QT_MOC_LITERAL(6, 78, 1), // "f"
-QT_MOC_LITERAL(7, 80, 10), // "readOutput"
-QT_MOC_LITERAL(8, 91, 6), // "Field&"
-QT_MOC_LITERAL(9, 98, 8), // "updateUi"
-QT_MOC_LITERAL(10, 107, 16), // "updateTroopsInfo"
-QT_MOC_LITERAL(11, 124, 11) // "renderField"
+QT_MOC_LITERAL(4, 61, 15), // "executeProgramm"
+QT_MOC_LITERAL(5, 77, 5), // "Field"
+QT_MOC_LITERAL(6, 83, 1), // "f"
+QT_MOC_LITERAL(7, 85, 7), // "QPoint&"
+QT_MOC_LITERAL(8, 93, 4), // "move"
+QT_MOC_LITERAL(9, 98, 6), // "attack"
+QT_MOC_LITERAL(10, 105, 10), // "writeInput"
+QT_MOC_LITERAL(11, 116, 10), // "readOutput"
+QT_MOC_LITERAL(12, 127, 12), // "renderMotion"
+QT_MOC_LITERAL(13, 140, 13), // "QList<QPoint>"
+QT_MOC_LITERAL(14, 154, 10), // "motionPath"
+QT_MOC_LITERAL(15, 165, 11), // "renderField"
+QT_MOC_LITERAL(16, 177, 16) // "updateTroopsInfo"
 
     },
     "MainWindow\0on_actionStart_triggered\0"
-    "\0on_actionStop_triggered\0writeInput\0"
-    "Field\0f\0readOutput\0Field&\0updateUi\0"
-    "updateTroopsInfo\0renderField"
+    "\0on_actionStop_triggered\0executeProgramm\0"
+    "Field\0f\0QPoint&\0move\0attack\0writeInput\0"
+    "readOutput\0renderMotion\0QList<QPoint>\0"
+    "motionPath\0renderField\0updateTroopsInfo"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +63,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,20 +71,22 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x0a /* Public */,
-       3,    0,   50,    2, 0x0a /* Public */,
-       4,    1,   51,    2, 0x0a /* Public */,
-       7,    1,   54,    2, 0x0a /* Public */,
-       9,    1,   57,    2, 0x0a /* Public */,
-      10,    1,   60,    2, 0x0a /* Public */,
-      11,    1,   63,    2, 0x0a /* Public */,
+       1,    0,   54,    2, 0x0a /* Public */,
+       3,    0,   55,    2, 0x0a /* Public */,
+       4,    3,   56,    2, 0x0a /* Public */,
+      10,    1,   63,    2, 0x0a /* Public */,
+      11,    2,   66,    2, 0x0a /* Public */,
+      12,    2,   71,    2, 0x0a /* Public */,
+      15,    1,   76,    2, 0x0a /* Public */,
+      16,    1,   79,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 5, 0x80000000 | 7, 0x80000000 | 7,    6,    8,    9,
     QMetaType::Void, 0x80000000 | 5,    6,
-    QMetaType::Void, 0x80000000 | 8,    6,
-    QMetaType::Void, 0x80000000 | 5,    6,
+    QMetaType::Void, 0x80000000 | 7, 0x80000000 | 7,    8,    9,
+    QMetaType::Void, 0x80000000 | 5, 0x80000000 | 13,    6,   14,
     QMetaType::Void, 0x80000000 | 5,    6,
     QMetaType::Void, 0x80000000 | 5,    6,
 
@@ -92,12 +101,24 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->on_actionStart_triggered(); break;
         case 1: _t->on_actionStop_triggered(); break;
-        case 2: _t->writeInput((*reinterpret_cast< const Field(*)>(_a[1]))); break;
-        case 3: _t->readOutput((*reinterpret_cast< Field(*)>(_a[1]))); break;
-        case 4: _t->updateUi((*reinterpret_cast< const Field(*)>(_a[1]))); break;
-        case 5: _t->updateTroopsInfo((*reinterpret_cast< const Field(*)>(_a[1]))); break;
+        case 2: _t->executeProgramm((*reinterpret_cast< const Field(*)>(_a[1])),(*reinterpret_cast< QPoint(*)>(_a[2])),(*reinterpret_cast< QPoint(*)>(_a[3]))); break;
+        case 3: _t->writeInput((*reinterpret_cast< const Field(*)>(_a[1]))); break;
+        case 4: _t->readOutput((*reinterpret_cast< QPoint(*)>(_a[1])),(*reinterpret_cast< QPoint(*)>(_a[2]))); break;
+        case 5: _t->renderMotion((*reinterpret_cast< const Field(*)>(_a[1])),(*reinterpret_cast< const QList<QPoint>(*)>(_a[2]))); break;
         case 6: _t->renderField((*reinterpret_cast< const Field(*)>(_a[1]))); break;
+        case 7: _t->updateTroopsInfo((*reinterpret_cast< const Field(*)>(_a[1]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 5:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 1:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QList<QPoint> >(); break;
+            }
+            break;
         }
     }
 }
@@ -127,13 +148,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        if (_id < 8)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 8;
     }
     return _id;
 }

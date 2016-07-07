@@ -19,10 +19,10 @@ public:
 
     void addTroop(Troop troop);
 
-    bool troopExists(QPoint position) const;
-    Troop getTroop(QPoint position) const;
+    void action(QPoint actionMove, QPoint actionAttack, QString &log, QList<QPoint> &motionPath, bool &attackSuccess, int &damage, int &died);
+    void actionMove(QPoint move, QString &log, QList<QPoint> &motionPath);
+    void actionAttack(QPoint actionAttack, QString &log, bool &attackSuccess, int &damage, int &died);
 
-    void action(QPoint move, QPoint attack, QString &log, QList<QPoint> &motionPath, bool &attackSuccess, int &damage, int &died);
     bool isGameEnd() const;
 
     QSize getSize() const;
@@ -32,29 +32,35 @@ public:
 private:
     void init();
 
+    bool troopExists(QPoint position) const;
+    Troop *getTroop(QPoint position);
+
     void regenerateActionQueue();
     void updateActionQueue();
-
     void checkForDeath();
+
     void loadFromFile(QString fileName);
+    bool cellExists(QPoint cell);
+    static QPoint validatePoint(QPoint p, QSize s);
 
     void moveTroop(Troop &troop, QPoint destination, QString &log, QList<QPoint> &motionPath);
-    bool cellExists(QPoint cell);
 
-    void initWaveMaps();
-    QPoint findReachableDestination(QPoint destination);
-    void doWave(QPoint destination);
-    QList<QPoint> restorePath(QPoint start, int maxLength);
 
     QSize size;
     QList<Troop> troops;
     QList<Troop*> actionQueue;
     int actionQueueLength;
 
-    // Maps for wave algo
+    // Wave algorithm + path search
+    QList<QPoint> searchWalkingPath(QPoint start, QPoint destination, int maxLength);
+    QList<QPoint> searchFlyingPath(QPoint start, QPoint destination, int maxLength);
+
+    void doWave(QPoint waveCenter);
+
     int wave[15][10];
     int obstacles[15][10];
     int visited[15][10];
+    int waveMax;
     QList<QPoint> neibours;
 };
 

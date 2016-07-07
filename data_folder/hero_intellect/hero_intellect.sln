@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hero_intellect", "hero_intellect\hero_intellect.csproj", "{B51C2496-2877-47C1-BF14-31062C1256CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B51C2496-2877-47C1-BF14-31062C1256CF}.Debug|x86.ActiveCfg = Debug|x86
+		{B51C2496-2877-47C1-BF14-31062C1256CF}.Debug|x86.Build.0 = Debug|x86
+		{B51C2496-2877-47C1-BF14-31062C1256CF}.Release|x86.ActiveCfg = Release|x86
+		{B51C2496-2877-47C1-BF14-31062C1256CF}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = hero_intellect\hero_intellect.csproj
+	EndGlobalSection
+EndGlobal

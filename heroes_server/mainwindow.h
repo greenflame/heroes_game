@@ -38,11 +38,15 @@ public slots:
     void writeInput(const Field &f);
     void readOutput(QPoint &move, QPoint &attack);
 
+    QImage renderField(const Field &f, QList<QPoint> motionPath, int motionStep, bool attackSuccess, QPoint attack, int damage, int died);
+    QRect pointToFrameRect(QPoint p);
 
-    void renderMotion(const Field &f, const QList<QPoint> &motionPath);
-
-    void renderField(const Field &f);
     void updateTroopsInfo(const Field &f);
+
+    void sleep(int msecs);
+
+    void validateInput(const Field &f, QPoint &move, QPoint &attack);
+
 private:
     Ui::MainWindow *ui;
 

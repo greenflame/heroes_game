@@ -7,6 +7,52 @@
 
 using namespace std;
 
+enum Movement {
+    FLYING,
+    WALKING
+};
+
+enum Attack {
+    MELEE,
+    DISTANT
+};
+
+class Unit
+{
+public:
+    Unit();
+    Unit(QString name, QString picture, QString faction, int level,
+         char upgrade, int attack, int defence, int damage_from,
+         int damage_to,Attack attack_type, int health, int speed,
+         Movement movement_type, int size, int cost);
+
+    bool operator ==(const Unit &other) const;
+
+    static QMap<QString, Unit> all();
+
+    QString name;
+    QString picture;
+    QString faction;
+
+    int level;
+    char upgrade;
+
+    int attack;
+    int defence;
+
+    int damage_from;
+    int damage_to;
+    Attack attack_type;
+
+    int health;
+
+    int speed;
+    Movement movement_type;
+    int size;
+
+    int cost;
+};
+
 class Troop {
 public:
     Troop() {}
@@ -45,7 +91,11 @@ int main() {
 
     for (int i = 0; i < n; i++) {
         Troop troop;
-        cin >> troop.x >> troop.y >> troop.type >> troop.count >> troop.health;
+        cin >> troop.x >> troop.y;
+        getline(cin, troop.type);
+        string tmp;
+        getline(cin, tmp);
+        cin >> troop.count >> troop.health;
         troops.push_back(troop);
     }
 

@@ -50,6 +50,7 @@ void Field::init()
     size = QSize(15, 10);
     actionQueueLength = 15;
 
+    waveMax = 1000;
     neibours << QPoint(1, 0);
     neibours << QPoint(0, 1);
     neibours << QPoint(-1, 0);
@@ -93,13 +94,13 @@ bool Field::troopExists(QPoint position) const
     return false;
 }
 
-Troop Field::getTroop(QPoint position) const
+Troop *Field::getTroop(QPoint position)
 {
     for (int i = 0; i < troops.length(); i++)
     {
         if (troops[i].getPosition() == position)
         {
-            return troops[i];
+            return &troops[i];
         }
     }
 
@@ -120,16 +121,32 @@ bool Field::isGameEnd() const
 void Field::action(QPoint move, QPoint attack, QString &log,
                    QList<QPoint> &motionPath, bool &attackSuccess, int &damage, int &died)
 {
-    Troop &troop = *actionQueue.takeFirst();
+    actionMove(move, log, motionPath);
+    actionAttack(attack, log, attackSuccess, damage, died);
+}
+
+void Field::actionMove(QPoint move, QString &log, QList<QPoint> &motionPath)
+{
+    move = validatePoint(move, size);
+    Troop &troop = *actionQueue.first();
 
     moveTroop(troop, move, log, motionPath);
+}
+
+void Field::actionAttack(QPoint attack, QString &log, bool &attackSuccess, int &damage, int &died)
+{
+    attack = validatePoint(attack, size);
+    Troop &troop = *actionQueue.takeFirst();
 
     if (troopExists(attack))
     {
-        troop.attack(troops[troops.indexOf(getTroop(attack))], log, attackSuccess, damage, died);
+        troop.attack(*getTroop(attack), log, attackSuccess, damage, died);
     }
     else
     {
+        attackSuccess = false;
+        damage = 0;
+        died = 0;
         log.append(QString("%1 attacks (%2, %3). Error: noody is here.\n")
                    .arg(troop.toStringShort())
                    .arg(attack.x())
@@ -161,6 +178,11 @@ void Field::loadFromFile(QString fileName)
     while(!input.atEnd())
     {
         QString args_s = input.readLine();
+        if (args_s.length() == 1)
+        {
+            continue;
+        }
+
         QStringList args = args_s.split(", ");
 
         QString owner = args[0];
@@ -181,23 +203,16 @@ void Field::moveTroop(Troop &troop, QPoint destination, QString &log, QList<QPoi
                .arg(destination.x())
                .arg(destination.y()));
 
-    // Adjust to map size
-    destination.rx() = qMax(0, destination.x());
-    destination.ry() = qMax(0, destination.y());
-
-    destination.rx() = qMin(size.width() - 1, destination.x());
-    destination.ry() = qMin(size.height() - 1, destination.y());
-
-    if (troop.position == destination)
+    QList<QPoint> path;
+    switch (troop.unit.movement_type)
     {
-        log.append(" Already here.");
-        motionPath = QList<QPoint>() << troop.position;
-        return;
+    case WALKING:
+        path = searchWalkingPath(troop.position, destination, troop.unit.speed);
+        break;
+    case FLYING:
+        path = searchFlyingPath(troop.position, destination, troop.unit.speed);
+        break;
     }
-
-    destination = findReachableDestination(destination);
-    doWave(destination);
-    QList<QPoint> path = restorePath(troop.position, troop.unit.speed);
 
     troop.position = path.last();
 
@@ -212,14 +227,27 @@ bool Field::cellExists(QPoint cell)
     return QRect(QPoint(), size).contains(cell);
 }
 
-void Field::initWaveMaps()
+QPoint Field::validatePoint(QPoint p, QSize s)
+{
+    QPoint res = p;
+
+    res.rx() = qMax(0, res.x());
+    res.ry() = qMax(0, res.y());
+
+    res.rx() = qMin(s.width() - 1, res.x());
+    res.ry() = qMin(s.height() - 1, res.y());
+
+    return res;
+}
+
+void Field::doWave(QPoint waveCenter)
 {
     // Clear maps
     for (int i = 0; i < 15; i++)
     {
         for (int j = 0; j < 10; j++)
         {
-            wave[i][j] = 1000;
+            wave[i][j] = waveMax;
             obstacles[i][j] = 0;
             visited[i][j] = 0;
         }
@@ -230,48 +258,12 @@ void Field::initWaveMaps()
     {
         obstacles[troops.at(i).position.x()][troops.at(i).position.y()] = 1;
     }
-}
-
-QPoint Field::findReachableDestination(QPoint destination)
-{
-    initWaveMaps();
+    obstacles[waveCenter.x()][waveCenter.y()] = 0;  // Exclude wave center
 
     // Wave
     QQueue<QPoint> queue;
-    queue.enqueue(destination);
-
-    while (!queue.empty())
-    {
-        QPoint curCell = queue.dequeue();
-        visited[curCell.x()][curCell.y()] = 1;
-
-        if (!obstacles[curCell.x()][curCell.y()])
-        {
-            return curCell;
-        }
-
-        for (int i = 0; i < neibours.length(); i++)
-        {
-            QPoint curNeib = curCell + neibours.at(i);
-
-            if (cellExists(curNeib) && !visited[curNeib.x()][curNeib.y()])  // Exists and not visited
-            {
-                queue.enqueue(curNeib); // Add to queue
-            }
-        }
-    }
-
-    return QPoint(0, 0);
-}
-
-void Field::doWave(QPoint destination)
-{
-    initWaveMaps();
-
-    // Wave
-    QQueue<QPoint> queue;
-    queue.enqueue(destination);
-    wave[destination.x()][destination.y()] = 0;
+    queue.enqueue(waveCenter);
+    wave[waveCenter.x()][waveCenter.y()] = 0;
 
     while (!queue.empty())
     {
@@ -300,8 +292,39 @@ void Field::doWave(QPoint destination)
     }
 }
 
-QList<QPoint> Field::restorePath(QPoint start, int maxLength)
+QList<QPoint> Field::searchWalkingPath(QPoint start, QPoint destination, int maxLength)
 {
+    // Adjust destination
+    doWave(start);
+    QPoint adjustedDestination = start;
+
+    for (int i = 0; i < 15; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            QPoint curPoint(i, j);
+
+            if (wave[i][j] != waveMax)  // Reachable
+            {
+                int oldDist = (adjustedDestination - destination).manhattanLength();
+                int newDist = (curPoint - destination).manhattanLength();
+
+                if (newDist < oldDist)  // Closest to aim
+                {
+                    adjustedDestination = curPoint;
+                }
+
+                if (newDist == oldDist && wave[curPoint.x()][curPoint.y()] <
+                        wave[adjustedDestination.x()][adjustedDestination.y()]) // Closest to start
+                {
+                    adjustedDestination = curPoint;
+                }
+            }
+        }
+    }
+
+    // Restore path
+    doWave(adjustedDestination);
     QList<QPoint> path;
     path.append(start);
     int lengthLeft = maxLength;
@@ -330,4 +353,30 @@ QList<QPoint> Field::restorePath(QPoint start, int maxLength)
     }
 
     return path;
+}
+
+QList<QPoint> Field::searchFlyingPath(QPoint start, QPoint destination, int maxLength)
+{
+    doWave(start);
+    QPoint end = start;
+
+    for (int i = 0; i < 15; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            QPoint curCell(i, j);
+
+            if (!obstacles[i][j] &&     // Reachable(obstacles)
+                    (start - curCell).manhattanLength() <= maxLength &&    // Reachable(length)
+                    (destination - curCell).manhattanLength() <
+                    (destination - end).manhattanLength())
+            {
+                end = curCell;
+            }
+        }
+    }
+
+    QList<QPoint> result;
+    result << start << end;
+    return result;
 }

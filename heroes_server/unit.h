@@ -18,6 +18,10 @@ class Unit
 {
 public:
     Unit();
+    Unit(QString name, QString picture, QString faction, int level,
+         char upgrade, int attack, int defence, int damage_from,
+         int damage_to,Attack attack_type, int health, int speed,
+         Movement movement_type, int size, int cost);
 
     bool operator ==(const Unit &other) const;
 

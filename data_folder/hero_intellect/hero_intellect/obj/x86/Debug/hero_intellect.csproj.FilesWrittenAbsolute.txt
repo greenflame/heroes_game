@@ -1,0 +1,5 @@
+/Users/Alexander/Desktop/heroes_game/data_folder/hero_intellect/hero_intellect/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/Alexander/Desktop/heroes_game/data_folder/hero_intellect/hero_intellect/bin/Debug/hero_intellect.exe.mdb
+/Users/Alexander/Desktop/heroes_game/data_folder/hero_intellect/hero_intellect/bin/Debug/hero_intellect.exe
+/Users/Alexander/Desktop/heroes_game/data_folder/hero_intellect/hero_intellect/obj/x86/Debug/hero_intellect.exe
+/Users/Alexander/Desktop/heroes_game/data_folder/hero_intellect/hero_intellect/obj/x86/Debug/hero_intellect.exe.mdb

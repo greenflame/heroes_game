@@ -20,8 +20,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[17];
-    char stringdata0[194];
+    QByteArrayData data[25];
+    char stringdata0[263];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,18 +42,28 @@ QT_MOC_LITERAL(8, 93, 4), // "move"
 QT_MOC_LITERAL(9, 98, 6), // "attack"
 QT_MOC_LITERAL(10, 105, 10), // "writeInput"
 QT_MOC_LITERAL(11, 116, 10), // "readOutput"
-QT_MOC_LITERAL(12, 127, 12), // "renderMotion"
-QT_MOC_LITERAL(13, 140, 13), // "QList<QPoint>"
-QT_MOC_LITERAL(14, 154, 10), // "motionPath"
-QT_MOC_LITERAL(15, 165, 11), // "renderField"
-QT_MOC_LITERAL(16, 177, 16) // "updateTroopsInfo"
+QT_MOC_LITERAL(12, 127, 11), // "renderField"
+QT_MOC_LITERAL(13, 139, 13), // "QList<QPoint>"
+QT_MOC_LITERAL(14, 153, 10), // "motionPath"
+QT_MOC_LITERAL(15, 164, 10), // "motionStep"
+QT_MOC_LITERAL(16, 175, 13), // "attackSuccess"
+QT_MOC_LITERAL(17, 189, 6), // "damage"
+QT_MOC_LITERAL(18, 196, 4), // "died"
+QT_MOC_LITERAL(19, 201, 16), // "pointToFrameRect"
+QT_MOC_LITERAL(20, 218, 1), // "p"
+QT_MOC_LITERAL(21, 220, 16), // "updateTroopsInfo"
+QT_MOC_LITERAL(22, 237, 5), // "sleep"
+QT_MOC_LITERAL(23, 243, 5), // "msecs"
+QT_MOC_LITERAL(24, 249, 13) // "validateInput"
 
     },
     "MainWindow\0on_actionStart_triggered\0"
     "\0on_actionStop_triggered\0executeProgramm\0"
     "Field\0f\0QPoint&\0move\0attack\0writeInput\0"
-    "readOutput\0renderMotion\0QList<QPoint>\0"
-    "motionPath\0renderField\0updateTroopsInfo"
+    "readOutput\0renderField\0QList<QPoint>\0"
+    "motionPath\0motionStep\0attackSuccess\0"
+    "damage\0died\0pointToFrameRect\0p\0"
+    "updateTroopsInfo\0sleep\0msecs\0validateInput"
 };
 #undef QT_MOC_LITERAL
 
@@ -63,7 +73,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -71,14 +81,16 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   54,    2, 0x0a /* Public */,
-       3,    0,   55,    2, 0x0a /* Public */,
-       4,    3,   56,    2, 0x0a /* Public */,
-      10,    1,   63,    2, 0x0a /* Public */,
-      11,    2,   66,    2, 0x0a /* Public */,
-      12,    2,   71,    2, 0x0a /* Public */,
-      15,    1,   76,    2, 0x0a /* Public */,
-      16,    1,   79,    2, 0x0a /* Public */,
+       1,    0,   64,    2, 0x0a /* Public */,
+       3,    0,   65,    2, 0x0a /* Public */,
+       4,    3,   66,    2, 0x0a /* Public */,
+      10,    1,   73,    2, 0x0a /* Public */,
+      11,    2,   76,    2, 0x0a /* Public */,
+      12,    7,   81,    2, 0x0a /* Public */,
+      19,    1,   96,    2, 0x0a /* Public */,
+      21,    1,   99,    2, 0x0a /* Public */,
+      22,    1,  102,    2, 0x0a /* Public */,
+      24,    3,  105,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -86,9 +98,11 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, 0x80000000 | 5, 0x80000000 | 7, 0x80000000 | 7,    6,    8,    9,
     QMetaType::Void, 0x80000000 | 5,    6,
     QMetaType::Void, 0x80000000 | 7, 0x80000000 | 7,    8,    9,
-    QMetaType::Void, 0x80000000 | 5, 0x80000000 | 13,    6,   14,
+    QMetaType::QImage, 0x80000000 | 5, 0x80000000 | 13, QMetaType::Int, QMetaType::Bool, QMetaType::QPoint, QMetaType::Int, QMetaType::Int,    6,   14,   15,   16,    9,   17,   18,
+    QMetaType::QRect, QMetaType::QPoint,   20,
     QMetaType::Void, 0x80000000 | 5,    6,
-    QMetaType::Void, 0x80000000 | 5,    6,
+    QMetaType::Void, QMetaType::Int,   23,
+    QMetaType::Void, 0x80000000 | 5, 0x80000000 | 7, 0x80000000 | 7,    6,    8,    9,
 
        0        // eod
 };
@@ -104,9 +118,13 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 2: _t->executeProgramm((*reinterpret_cast< const Field(*)>(_a[1])),(*reinterpret_cast< QPoint(*)>(_a[2])),(*reinterpret_cast< QPoint(*)>(_a[3]))); break;
         case 3: _t->writeInput((*reinterpret_cast< const Field(*)>(_a[1]))); break;
         case 4: _t->readOutput((*reinterpret_cast< QPoint(*)>(_a[1])),(*reinterpret_cast< QPoint(*)>(_a[2]))); break;
-        case 5: _t->renderMotion((*reinterpret_cast< const Field(*)>(_a[1])),(*reinterpret_cast< const QList<QPoint>(*)>(_a[2]))); break;
-        case 6: _t->renderField((*reinterpret_cast< const Field(*)>(_a[1]))); break;
+        case 5: { QImage _r = _t->renderField((*reinterpret_cast< const Field(*)>(_a[1])),(*reinterpret_cast< QList<QPoint>(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])),(*reinterpret_cast< bool(*)>(_a[4])),(*reinterpret_cast< QPoint(*)>(_a[5])),(*reinterpret_cast< int(*)>(_a[6])),(*reinterpret_cast< int(*)>(_a[7])));
+            if (_a[0]) *reinterpret_cast< QImage*>(_a[0]) = _r; }  break;
+        case 6: { QRect _r = _t->pointToFrameRect((*reinterpret_cast< QPoint(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QRect*>(_a[0]) = _r; }  break;
         case 7: _t->updateTroopsInfo((*reinterpret_cast< const Field(*)>(_a[1]))); break;
+        case 8: _t->sleep((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: _t->validateInput((*reinterpret_cast< const Field(*)>(_a[1])),(*reinterpret_cast< QPoint(*)>(_a[2])),(*reinterpret_cast< QPoint(*)>(_a[3]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -148,13 +166,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 10;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 10;
     }
     return _id;
 }

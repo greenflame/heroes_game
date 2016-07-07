@@ -5,6 +5,28 @@ Unit::Unit()
 
 }
 
+Unit::Unit(QString name, QString picture, QString faction, int level,
+           char upgrade, int attack, int defence, int damage_from,
+           int damage_to, Attack attack_type, int health, int speed,
+           Movement movement_type, int size, int cost)
+{
+    this->name = name;
+    this->picture = picture;
+    this->faction = faction;
+    this->level = level;
+    this->upgrade = upgrade;
+    this->attack = attack;
+    this->defence = defence;
+    this->damage_from = damage_from;
+    this->damage_to = damage_to;
+    this->attack_type = attack_type;
+    this->health = health;
+    this->speed = speed;
+    this->movement_type = movement_type;
+    this->size = size;
+    this->cost = cost;
+}
+
 bool Unit::operator ==(const Unit &other) const
 {
     return name == other.name &&
@@ -28,257 +50,52 @@ QMap<QString, Unit> Unit::all()
 {
     QMap<QString, Unit> units;
 
-    Unit pikeman;
-    pikeman.name = "Pikeman";
-    pikeman.picture = "h6_unit_Haven_1a_Sentinel.png";
-    pikeman.faction = "Castle";
-    pikeman.level = 1;
-    pikeman.upgrade = 'a';
-    pikeman.attack = 4;
-    pikeman.defence = 5;
-    pikeman.damage_from = 1;
-    pikeman.damage_to = 3;
-    pikeman.attack_type = MELEE;
-    pikeman.health = 10;
-    pikeman.speed = 4;
-    pikeman.movement_type = WALKING;
-    pikeman.size = 1;
-    pikeman.cost = 60;
-    units.insert("Pikeman", pikeman);
+    // name, picture, faction, level, upgrade, attack, defence, damage_from, damage_to, attack_type, health, speed, movement_type, size, cost
 
-    Unit halberdier;
-    halberdier.name = "Halberdier";
-    halberdier.picture = "h6_unit_Haven_1b_Praetorian.png";
-    halberdier.faction = "Castle";
-    halberdier.level = 1;
-    halberdier.upgrade = 'b';
-    halberdier.attack = 6;
-    halberdier.defence = 5;
-    halberdier.damage_from = 2;
-    halberdier.damage_to = 3;
-    halberdier.attack_type = MELEE;
-    halberdier.health = 10;
-    halberdier.speed = 5;
-    halberdier.movement_type = WALKING;
-    halberdier.size = 1;
-    halberdier.cost = 75;
-    units.insert("Halberdier", halberdier);
+    units.insert("Pikeman", Unit("Pikeman", "h6_unit_Haven_1a_Sentinel.png", "Castle", 1, 'a', 4, 5, 1, 3, MELEE, 10, 4, WALKING, 1, 60));
+    units.insert("Halberdier", Unit("Halberdier", "h6_unit_Haven_1b_Praetorian.png", "Castle", 1, 'b', 6, 5, 2, 3, MELEE, 10, 5, WALKING, 1, 75));
+    units.insert("Archer", Unit("Archer", "h6_unit_Haven_2a_Crossbowman.png", "Castle", 2, 'a', 6, 3, 2, 3, DISTANT, 10, 4, WALKING, 1, 100));
+    units.insert("Marksman", Unit("Marksman", "h6_unit_Haven_2b_Marksman.png", "Castle", 2, 'b', 6, 3, 2, 3, DISTANT, 10, 6, WALKING, 1, 150));
+    units.insert("Griffin", Unit("Griffin", "h6_unit_Haven_3a_Sister.png", "Castle", 3, 'a', 8, 8, 3, 6, MELEE, 25, 6, FLYING, 2, 200));
+    units.insert("Royal Griffin", Unit("Royal Griffin", "h6_unit_Haven_3b_Vestal.png", "Castle", 3, 'b', 9, 9, 3, 6, MELEE, 25, 9, FLYING, 2, 240));
+    units.insert("Swordsman", Unit("Swordsman", "h6_unit_Haven_4a_Griffin.png", "Castle", 4, 'a', 10, 12, 6, 9, MELEE, 35, 5, WALKING, 1, 300));
+    units.insert("Crusader", Unit("Crusader", "h6_unit_Haven_4b_Imperial_Griffin.png", "Castle", 4, 'b', 12, 12, 7, 10, MELEE, 35, 6, WALKING, 1, 400));
+    units.insert("Monk", Unit("Monk", "h6_unit_Haven_5a_Radiant_Glory.png", "Castle", 5, 'a', 12, 7, 10, 12, DISTANT, 30, 5, WALKING, 1, 400));
+    units.insert("Zealot", Unit("Zealot", "h6_unit_Haven_5b_Blazing_Glory.png", "Castle", 5, 'b', 12, 10, 10, 12, DISTANT, 30, 7, WALKING, 1, 450));
+    units.insert("Cavalier", Unit("Cavalier", "h6_unit_Haven_6a_Sun_Rider.png", "Castle", 6, 'a', 15, 15, 15, 25, MELEE, 100, 7, WALKING, 2, 1000));
+    units.insert("Champion", Unit("Champion", "h6_unit_Haven_6b_Sun_Crusader.png", "Castle", 6, 'b', 16, 16, 20, 25, MELEE, 100, 9, WALKING, 2, 1200));
+    units.insert("Angel", Unit("Angel", "h6_unit_Haven_7a_Seraph.png", "Castle", 7, 'a', 20, 20, 50, 50, MELEE, 200, 12, FLYING, 1, 3000));
+    units.insert("Archangel", Unit("Archangel", "h6_unit_Haven_7b_Celestial.png", "Castle", 7, 'b', 30, 30, 50, 50, MELEE, 250, 18, FLYING, 2, 5000));
 
-    Unit archer;
-    archer.name = "Archer";
-    archer.picture = "h6_unit_Haven_2a_Crossbowman.png";
-    archer.faction = "Castle";
-    archer.level = 2;
-    archer.upgrade = 'a';
-    archer.attack = 6;
-    archer.defence = 3;
-    archer.damage_from = 2;
-    archer.damage_to = 3;
-    archer.attack_type = DISTANT;
-    archer.health = 10;
-    archer.speed = 4;
-    archer.movement_type = WALKING;
-    archer.size = 1;
-    archer.cost = 100;
-    units.insert("Archer", archer);
+    units.insert("Imp", Unit("Imp", "h6_unit_Inferno_1a_Maniac.png", "Inferno", 1, 'a', 2, 3, 1, 2, MELEE, 4, 5, WALKING, 1, 50));
+    units.insert("Familiar", Unit("Familiar", "h6_unit_Inferno_1b_Demented.png", "Inferno", 1, 'b', 4, 4, 1, 2, MELEE, 4, 7, WALKING, 1, 60));
+    units.insert("Gog", Unit("Gog", "h6_unit_Inferno_2a_Hell_Hound.png", "Inferno", 2, 'a', 6, 4, 2, 4, DISTANT, 13, 4, WALKING, 1, 125));
+    units.insert("Magog", Unit("Magog", "h6_unit_Inferno_2b_Cerberus.png", "Inferno", 2, 'b', 7, 4, 2, 4, DISTANT, 13, 6, WALKING, 1, 175));
+    units.insert("Hound", Unit("Hound", "h6_unit_Inferno_3a_Succubus.png", "Inferno", 3, 'a', 10, 6, 2, 7, MELEE, 25, 7, WALKING, 2, 200));
+    units.insert("Cerberus", Unit("Cerberus", "h6_unit_Inferno_3b_Lilim.png", "Inferno", 3, 'b', 10, 8, 2, 5, MELEE, 25, 8, WALKING, 2, 250));
+    units.insert("Demon", Unit("Demon", "h6_unit_Inferno_4a_Breeder.png", "Inferno", 4, 'a', 10, 10, 7, 9, MELEE, 35, 5, WALKING, 1, 250));
+    units.insert("Horned Demon", Unit("Horned Demon", "h6_unit_Inferno_4b_Breeder_Mother.png", "Inferno", 4, 'b', 10, 10, 7, 9, MELEE, 40, 6, WALKING, 1, 270));
+    units.insert("Pit Fiend", Unit("Pit Fiend", "h6_unit_Inferno_5a_Tormentor.png", "Inferno", 5, 'a', 13, 13, 13, 17, MELEE, 45, 6, WALKING, 1, 500));
+    units.insert("Pit Lord", Unit("Pit Lord", "h6_unit_Inferno_5b_Lacerator.png", "Inferno", 5, 'b', 13, 13, 13, 17, MELEE, 45, 7, WALKING, 1, 700));
+    units.insert("Efreet", Unit("Efreet", "h6_unit_Inferno_6a_Juggernaut.png", "Inferno", 6, 'a', 16, 12, 16, 24, MELEE, 90, 9, FLYING, 1, 900));
+    units.insert("Efreet Sultan", Unit("Efreet Sultan", "h6_unit_Inferno_6b_Ravager.png", "Inferno", 6, 'b', 16, 14, 16, 24, MELEE, 90, 13, FLYING, 1, 1100));
+    units.insert("Devil", Unit("Devil", "h6_unit_Inferno_7a_Pit_Fiend.png", "Inferno", 7, 'a', 19, 21, 30, 40, MELEE, 160, 11, FLYING, 1, 2700));
+    units.insert("Arch Devil", Unit("Arch Devil", "h6_unit_Inferno_7b_Pit_Lord.png", "Inferno", 7, 'b', 26, 28, 30, 40, MELEE, 200, 17, FLYING, 1, 4500));
 
-    Unit marksman;
-    marksman.name = "Marksman";
-    marksman.picture = "h6_unit_Haven_2b_Marksman.png";
-    marksman.faction = "Castle";
-    marksman.level = 2;
-    marksman.upgrade = 'b';
-    marksman.attack = 6;
-    marksman.defence = 3;
-    marksman.damage_from = 2;
-    marksman.damage_to = 3;
-    marksman.attack_type = DISTANT;
-    marksman.health = 10;
-    marksman.speed = 6;
-    marksman.movement_type = WALKING;
-    marksman.size = 1;
-    marksman.cost = 150;
-    units.insert("Marksman", marksman);
-
-    Unit griffin;
-    griffin.name = "Griffin";
-    griffin.picture = "h6_unit_Haven_3a_Sister.png";
-    griffin.faction = "Castle";
-    griffin.level = 3;
-    griffin.upgrade = 'a';
-    griffin.attack = 8;
-    griffin.defence = 8;
-    griffin.damage_from = 3;
-    griffin.damage_to = 6;
-    griffin.attack_type = MELEE;
-    griffin.health = 25;
-    griffin.speed = 6;
-    griffin.movement_type = FLYING;
-    griffin.size = 2;
-    griffin.cost = 200;
-    units.insert("Griffin", griffin);
-
-    Unit royal_griffin;
-    royal_griffin.name = "Royal Griffin";
-    royal_griffin.picture = "h6_unit_Haven_3b_Vestal.png";
-    royal_griffin.faction = "Castle";
-    royal_griffin.level = 3;
-    royal_griffin.upgrade = 'b';
-    royal_griffin.attack = 9;
-    royal_griffin.defence = 9;
-    royal_griffin.damage_from = 3;
-    royal_griffin.damage_to = 6;
-    royal_griffin.attack_type = MELEE;
-    royal_griffin.health = 25;
-    royal_griffin.speed = 9;
-    royal_griffin.movement_type = FLYING;
-    royal_griffin.size = 2;
-    royal_griffin.cost = 240;
-    units.insert("royal griffin", royal_griffin);
-
-    Unit swordsman;
-    swordsman.name = "Swordsman";
-    swordsman.picture = "h6_unit_Haven_4a_Griffin.png";
-    swordsman.faction = "Castle";
-    swordsman.level = 4;
-    swordsman.upgrade = 'a';
-    swordsman.attack = 10;
-    swordsman.defence = 12;
-    swordsman.damage_from = 6;
-    swordsman.damage_to = 9;
-    swordsman.attack_type = MELEE;
-    swordsman.health = 35;
-    swordsman.speed = 5;
-    swordsman.movement_type = WALKING;
-    swordsman.size = 1;
-    swordsman.cost = 300;
-    units.insert("Swordsman", swordsman);
-
-    Unit crusader;
-    crusader.name = "Crusader";
-    crusader.picture = "h6_unit_Haven_4b_Imperial_Griffin.png";
-    crusader.faction = "Castle";
-    crusader.level = 4;
-    crusader.upgrade = 'b';
-    crusader.attack = 12;
-    crusader.defence = 12;
-    crusader.damage_from = 7;
-    crusader.damage_to = 10;
-    crusader.attack_type = MELEE;
-    crusader.health = 35;
-    crusader.speed = 6;
-    crusader.movement_type = WALKING;
-    crusader.size = 1;
-    crusader.cost = 400;
-    units.insert("Crusader", crusader);
-
-    Unit monk;
-    monk.name = "Monk";
-    monk.picture = "h6_unit_Haven_5a_Radiant_Glory.png";
-    monk.faction = "Castle";
-    monk.level = 5;
-    monk.upgrade = 'a';
-    monk.attack = 12;
-    monk.defence = 7;
-    monk.damage_from = 10;
-    monk.damage_to = 12;
-    monk.attack_type = DISTANT;
-    monk.health = 30;
-    monk.speed = 5;
-    monk.movement_type = WALKING;
-    monk.size = 1;
-    monk.cost = 400;
-    units.insert("Monk", monk);
-
-    Unit zealot;
-    zealot.name = "Zealot";
-    zealot.picture = "h6_unit_Haven_5b_Blazing_Glory.png";
-    zealot.faction = "Castle";
-    zealot.level = 5;
-    zealot.upgrade = 'b';
-    zealot.attack = 12;
-    zealot.defence = 10;
-    zealot.damage_from = 10;
-    zealot.damage_to = 12;
-    zealot.attack_type = DISTANT;
-    zealot.health = 30;
-    zealot.speed = 7;
-    zealot.movement_type = WALKING;
-    zealot.size = 1;
-    zealot.cost = 450;
-    units.insert("Zealot", zealot);
-
-    Unit cavalier;
-    cavalier.name = "Cavalier";
-    cavalier.picture = "h6_unit_Haven_6a_Sun_Rider.png";
-    cavalier.faction = "Castle";
-    cavalier.level = 6;
-    cavalier.upgrade = 'a';
-    cavalier.attack = 15;
-    cavalier.defence = 15;
-    cavalier.damage_from = 15;
-    cavalier.damage_to = 25;
-    cavalier.attack_type = MELEE;
-    cavalier.health = 100;
-    cavalier.speed = 7;
-    cavalier.movement_type = WALKING;
-    cavalier.size = 2;
-    cavalier.cost = 1000;
-    units.insert("Cavalier", cavalier);
-
-    Unit champion;
-    champion.name = "Champion";
-    champion.picture = "h6_unit_Haven_6b_Sun_Crusader.png";
-    champion.faction = "Castle";
-    champion.level = 6;
-    champion.upgrade = 'b';
-    champion.attack = 16;
-    champion.defence = 16;
-    champion.damage_from = 20;
-    champion.damage_to = 25;
-    champion.attack_type = MELEE;
-    champion.health = 100;
-    champion.speed = 9;
-    champion.movement_type = WALKING;
-    champion.size = 2;
-    champion.cost = 1200;
-    units.insert("Champion", champion);
-
-    Unit angel;
-    angel.name = "Angel";
-    angel.picture = "h6_unit_Haven_7a_Seraph.png";
-    angel.faction = "Castle";
-    angel.level = 7;
-    angel.upgrade = 'a';
-    angel.attack = 20;
-    angel.defence = 20;
-    angel.damage_from = 50;
-    angel.damage_to = 50;
-    angel.attack_type = MELEE;
-    angel.health = 200;
-    angel.speed = 12;
-    angel.movement_type = FLYING;
-    angel.size = 1;
-    angel.cost = 3000;
-    units.insert("Angel", angel);
-
-    Unit archangel;
-    archangel.name = "Archangel";
-    archangel.picture = "h6_unit_Haven_7b_Celestial.png";
-    archangel.faction = "Castle";
-    archangel.level = 7;
-    archangel.upgrade = 'b';
-    archangel.attack = 30;
-    archangel.defence = 30;
-    archangel.damage_from = 50;
-    archangel.damage_to = 50;
-    archangel.attack_type = MELEE;
-    archangel.health = 250;
-    archangel.speed = 18;
-    archangel.movement_type = FLYING;
-    archangel.size = 2;
-    archangel.cost = 5000;
-    units.insert("Archangel", archangel);
+    units.insert("Skeleton", Unit("Skeleton", "h6_unit_Necropolis_1a_Skeleton.png", "Necropolis", 1, 'a', 5, 4, 1, 3, MELEE, 6, 4, WALKING, 1, 60));
+    units.insert("Skeleton Warrior", Unit("Skeleton Warrior", "h6_unit_Necropolis_1b_Skeletal_Spearman.png", "Necropolis", 1, 'b', 6, 6, 1, 3, MELEE, 6, 5, WALKING, 1, 70));
+    units.insert("Walking Dead", Unit("Walking Dead", "h6_unit_Necropolis_2a_Ghoul.png", "Necropolis", 2, 'a', 5, 5, 2, 3, MELEE, 15, 3, WALKING, 1, 100));
+    units.insert("Zombie", Unit("Zombie", "h6_unit_Necropolis_2b_Ravenous_Ghoul.png", "Necropolis", 2, 'b', 5, 5, 2, 3, MELEE, 20, 4, WALKING, 1, 125));
+    units.insert("Wight", Unit("Wight", "h6_unit_Necropolis_3a_Ghost.png", "Necropolis", 3, 'a', 7, 7, 3, 5, MELEE, 18, 5, FLYING, 1, 200));
+    units.insert("Wraith", Unit("Wraith", "h6_unit_Necropolis_3b_Specter.png", "Necropolis", 3, 'b', 7, 7, 3, 5, MELEE, 18, 7, FLYING, 1, 230));
+    units.insert("Vampire", Unit("Vampire", "h6_unit_Necropolis_4a_Lich.png", "Necropolis", 4, 'a', 10, 9, 5, 8, MELEE, 30, 6, FLYING, 1, 360));
+    units.insert("Vampire Lord", Unit("Vampire Lord", "h6_unit_Necropolis_4b_Archlich.png", "Necropolis", 4, 'b', 10, 10, 5, 8, MELEE, 40, 9, FLYING, 1, 500));
+    units.insert("Lich", Unit("Lich", "h6_unit_Necropolis_5a_Lamasu.png", "Necropolis", 5, 'a', 13, 10, 11, 13, DISTANT, 30, 6, WALKING, 1, 550));
+    units.insert("Power Lich", Unit("Power Lich", "h6_unit_Necropolis_5b_Putrid_Lamasu.png", "Necropolis", 5, 'b', 13, 10, 11, 15, DISTANT, 40, 7, WALKING, 1, 600));
+    units.insert("Black Knight", Unit("Black Knight", "h6_unit_Necropolis_6a_Vampire.png", "Necropolis", 6, 'a', 16, 16, 15, 30, MELEE, 120, 7, WALKING, 2, 1200));
+    units.insert("Dread Knight", Unit("Dread Knight", "h6_unit_Necropolis_6b_Vampire_Lord.png", "Necropolis", 6, 'b', 18, 18, 15, 30, MELEE, 120, 9, WALKING, 2, 1500));
+    units.insert("Bone Dragon", Unit("Bone Dragon", "h6_unit_Necropolis_7a_Fate_Spinner.png", "Necropolis", 7, 'a', 17, 15, 25, 50, MELEE, 150, 9, FLYING, 2, 1800));
+    units.insert("Ghost Dragon", Unit("Ghost Dragon", "h6_unit_Necropolis_7b_Fate_Weaver.png", "Necropolis", 7, 'b', 19, 17, 25, 50, MELEE, 200, 14, FLYING, 2, 3000));
 
     return units;
 }

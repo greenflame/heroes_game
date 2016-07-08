@@ -1,29 +1,6 @@
-alex, 14, 0, Imp, 195
-alex, 14, 1, Familiar, 130
-alex, 14, 2, Gog, 86
-alex, 14, 3, Magog, 58
-alex, 14, 4, Hound, 38
-alex, 14, 5, Cerberus, 26
-alex, 14, 6, Demon, 17
-alex, 14, 7, Horned Demon, 11
-alex, 14, 8, Pit Fiend, 8
-alex, 14, 9, Pit Lord, 5
-alex, 13, 0, Efreet, 3
-alex, 13, 1, Efreet Sultan, 2
-alex, 13, 2, Devil, 2
-alex, 13, 3, Arch Devil, 1
 
-anton, 0, 0, Skeleton, 195
-anton, 0, 1, Skeleton Warrior, 130
-anton, 0, 2, Walking Dead, 86
-anton, 0, 3, Zombie, 58
-anton, 0, 4, Wight, 38
-anton, 0, 5, Wraith, 26
-anton, 0, 6, Vampire, 17
-anton, 0, 7, Vampire Lord, 11
-anton, 0, 8, Lich, 8
-anton, 0, 9, Power Lich, 5
-anton, 1, 0, Black Knight, 3
-anton, 1, 1, Dread Knight, 2
-anton, 1, 2, Bone Dragon, 2
-anton, 1, 3, Ghost Dragon, 1
+first, 0, 3, Pikeman, 500
+first, 0, 5, Archer, 200
+
+second, 14, 3, Pikeman, 500
+second, 14, 5, Archer, 200

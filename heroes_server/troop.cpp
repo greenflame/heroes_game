@@ -1,7 +1,7 @@
 #include "troop.h"
 
 
-Troop::Troop(QString owner, QPoint position, Unit unit, int count)
+Troop::Troop(Player owner, QPoint position, Unit unit, int count)
 {
     this->owner = owner;
     this->position = position;
@@ -133,7 +133,7 @@ QPoint Troop::getPosition() const
     return position;
 }
 
-QString Troop::getOwner() const
+Player Troop::getOwner() const
 {
     return owner;
 }

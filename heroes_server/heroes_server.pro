@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     unit.cpp \
     troop.cpp \
-    field.cpp
+    field.cpp \
+    session.cpp
 
 HEADERS  += mainwindow.h \
     unit.h \
     troop.h \
-    field.h
+    field.h \
+    session.h
 
 FORMS    += mainwindow.ui

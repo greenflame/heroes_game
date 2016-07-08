@@ -64,6 +64,8 @@ QList<Troop> Field::getTroops() const
 
 void Field::updateActionQueue()
 {
+    qsrand(QTime::currentTime().msec());
+
     // Fill to length
     while (actionQueue.length() < actionQueueLength)
     {
@@ -109,7 +111,7 @@ Troop *Field::getTroop(QPoint position)
 
 bool Field::isGameEnd() const
 {
-    QSet<QString> players;
+    QSet<Player> players;
 
     for (int i = 0; i < troops.count(); i++) {
         players.insert(troops[i].getOwner());
@@ -125,22 +127,43 @@ void Field::action(QPoint move, QPoint attack, QString &log,
     actionAttack(attack, log, attackSuccess, damage, died);
 }
 
-void Field::actionMove(QPoint move, QString &log, QList<QPoint> &motionPath)
+void Field::actionMove(QPoint destination, QString &log, QList<QPoint> &motionPath)
 {
-    move = validatePoint(move, size);
+    destination = validatePoint(destination, size);
     Troop &troop = *actionQueue.first();
 
-    moveTroop(troop, move, log, motionPath);
+    log.append(QString("%1 moves to (%2, %3). ")
+               .arg(troop.toStringFull())
+               .arg(destination.x())
+               .arg(destination.y()));
+
+    QList<QPoint> path;
+    switch (troop.unit.movement_type)
+    {
+    case WALKING:
+        path = searchWalkingPath(troop.position, destination, troop.unit.speed);
+        break;
+    case FLYING:
+        path = searchFlyingPath(troop.position, destination, troop.unit.speed);
+        break;
+    }
+
+    troop.position = path.last();
+
+    motionPath = path;
+    log.append(QString("Moved to (%1, %2).\n")
+               .arg(troop.position.x())
+               .arg(troop.position.y()));
 }
 
-void Field::actionAttack(QPoint attack, QString &log, bool &attackSuccess, int &damage, int &died)
+void Field::actionAttack(QPoint aim, QString &log, bool &attackSuccess, int &damage, int &died)
 {
-    attack = validatePoint(attack, size);
+    aim = validatePoint(aim, size);
     Troop &troop = *actionQueue.takeFirst();
 
-    if (troopExists(attack))
+    if (troopExists(aim))
     {
-        troop.attack(*getTroop(attack), log, attackSuccess, damage, died);
+        troop.attack(*getTroop(aim), log, attackSuccess, damage, died);
     }
     else
     {
@@ -149,8 +172,8 @@ void Field::actionAttack(QPoint attack, QString &log, bool &attackSuccess, int &
         died = 0;
         log.append(QString("%1 attacks (%2, %3). Error: noody is here.\n")
                    .arg(troop.toStringShort())
-                   .arg(attack.x())
-                   .arg(attack.y()));
+                   .arg(aim.x())
+                   .arg(aim.y()));
     }
 
     checkForDeath();
@@ -177,49 +200,22 @@ void Field::loadFromFile(QString fileName)
 
     while(!input.atEnd())
     {
-        QString args_s = input.readLine();
-        if (args_s.length() == 1)
+        QString line = input.readLine();
+        if (line.length() == 1)
         {
             continue;
         }
 
-        QStringList args = args_s.split(", ");
-
-        QString owner = args[0];
-        QPoint position(args[1].toInt(), args[2].toInt());
-        Unit unit = Unit::all()[args[3]];
-        int count = args[4].toInt();
+        QStringList params = line.split(", ");
+        Player owner = (params[0] == "first" ? FIRST_PALYER : SECOND_PLAYER);
+        QPoint position = QPoint(params[1].toInt(), params[2].toInt());
+        Unit unit = Unit::all()[params[3]];
+        int count = params[4].toInt();
 
         addTroop(Troop(owner, position, unit, count));
     }
 
     input.close();
-}
-
-void Field::moveTroop(Troop &troop, QPoint destination, QString &log, QList<QPoint> &motionPath)
-{
-    log.append(QString("%1 moves to (%2, %3). ")
-               .arg(troop.toStringFull())
-               .arg(destination.x())
-               .arg(destination.y()));
-
-    QList<QPoint> path;
-    switch (troop.unit.movement_type)
-    {
-    case WALKING:
-        path = searchWalkingPath(troop.position, destination, troop.unit.speed);
-        break;
-    case FLYING:
-        path = searchFlyingPath(troop.position, destination, troop.unit.speed);
-        break;
-    }
-
-    troop.position = path.last();
-
-    motionPath = path;
-    log.append(QString("Moved to (%1, %2).\n")
-               .arg(troop.position.x())
-               .arg(troop.position.y()));
 }
 
 bool Field::cellExists(QPoint cell)
@@ -366,12 +362,18 @@ QList<QPoint> Field::searchFlyingPath(QPoint start, QPoint destination, int maxL
         {
             QPoint curCell(i, j);
 
-            if (!obstacles[i][j] &&     // Reachable(obstacles)
-                    (start - curCell).manhattanLength() <= maxLength &&    // Reachable(length)
-                    (destination - curCell).manhattanLength() <
-                    (destination - end).manhattanLength())
+            if (!obstacles[i][j] && (start - curCell).manhattanLength() <= maxLength)   // Reachable(obstacles, length)
             {
-                end = curCell;
+                if ((destination - curCell).manhattanLength() < (destination - end).manhattanLength())
+                {
+                    end = curCell;
+                }
+
+                if ((destination - curCell).manhattanLength() == (destination - end).manhattanLength() &&
+                        (start - curCell).manhattanLength() < (start - end).manhattanLength())
+                {
+                    end = curCell;
+                }
             }
         }
     }

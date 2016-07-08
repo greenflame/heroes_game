@@ -52,12 +52,14 @@ SOURCES       = ../heroes_server/main.cpp \
 		../heroes_server/mainwindow.cpp \
 		../heroes_server/unit.cpp \
 		../heroes_server/troop.cpp \
-		../heroes_server/field.cpp moc_mainwindow.cpp
+		../heroes_server/field.cpp \
+		../heroes_server/session.cpp moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		unit.o \
 		troop.o \
 		field.o \
+		session.o \
 		moc_mainwindow.o
 DIST          = ../../../Qt/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.5/clang_64/mkspecs/qdevice.pri \
@@ -205,11 +207,13 @@ DIST          = ../../../Qt/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		../heroes_server/heroes_server.pro ../heroes_server/mainwindow.h \
 		../heroes_server/unit.h \
 		../heroes_server/troop.h \
-		../heroes_server/field.h ../heroes_server/main.cpp \
+		../heroes_server/field.h \
+		../heroes_server/session.h ../heroes_server/main.cpp \
 		../heroes_server/mainwindow.cpp \
 		../heroes_server/unit.cpp \
 		../heroes_server/troop.cpp \
-		../heroes_server/field.cpp
+		../heroes_server/field.cpp \
+		../heroes_server/session.cpp
 QMAKE_TARGET  = heroes_server
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = heroes_server.app/Contents/MacOS/heroes_server
@@ -575,8 +579,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../heroes_server/mainwindow.h ../heroes_server/unit.h ../heroes_server/troop.h ../heroes_server/field.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../heroes_server/main.cpp ../heroes_server/mainwindow.cpp ../heroes_server/unit.cpp ../heroes_server/troop.cpp ../heroes_server/field.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../heroes_server/mainwindow.h ../heroes_server/unit.h ../heroes_server/troop.h ../heroes_server/field.h ../heroes_server/session.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../heroes_server/main.cpp ../heroes_server/mainwindow.cpp ../heroes_server/unit.cpp ../heroes_server/troop.cpp ../heroes_server/field.cpp ../heroes_server/session.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../heroes_server/mainwindow.ui $(DISTDIR)/
 
 
@@ -634,6 +638,8 @@ moc_mainwindow.cpp: ../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QMa
 		../heroes_server/troop.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QPoint \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QtMath \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmath.h \
 		../heroes_server/field.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QSize \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qsize.h \
@@ -641,6 +647,8 @@ moc_mainwindow.cpp: ../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QMa
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QRect \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QQueue \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qqueue.h \
 		../heroes_server/mainwindow.h
 	/Users/Alexander/Qt/5.5/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/Alexander/Qt/5.5/clang_64/mkspecs/macx-clang -I/Users/Alexander/Desktop/heroes_game/heroes_server -I/Users/Alexander/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/Alexander/Qt/5.5/clang_64/lib/QtGui.framework/Headers -I/Users/Alexander/Qt/5.5/clang_64/lib/QtCore.framework/Headers -I. -F/Users/Alexander/Qt/5.5/clang_64/lib ../heroes_server/mainwindow.h -o moc_mainwindow.cpp
 
@@ -693,6 +701,8 @@ main.o: ../heroes_server/main.cpp ../heroes_server/mainwindow.h \
 		../heroes_server/troop.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QPoint \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QtMath \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmath.h \
 		../heroes_server/field.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QSize \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qsize.h \
@@ -700,6 +710,8 @@ main.o: ../heroes_server/main.cpp ../heroes_server/mainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QRect \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QQueue \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qqueue.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../heroes_server/main.cpp
@@ -733,6 +745,8 @@ mainwindow.o: ../heroes_server/mainwindow.cpp ../heroes_server/mainwindow.h \
 		../heroes_server/troop.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QPoint \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QtMath \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmath.h \
 		../heroes_server/field.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QSize \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qsize.h \
@@ -740,6 +754,8 @@ mainwindow.o: ../heroes_server/mainwindow.cpp ../heroes_server/mainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qlist.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QRect \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QQueue \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qqueue.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../heroes_server/mainwindow.cpp
 
@@ -757,6 +773,10 @@ troop.o: ../heroes_server/troop.cpp ../heroes_server/troop.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QTime \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QtMath \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qdebug.h \
 		../heroes_server/unit.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QMap \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmap.h
@@ -773,6 +793,8 @@ field.o: ../heroes_server/field.cpp ../heroes_server/field.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QRect \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qrect.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QQueue \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qqueue.h \
 		../heroes_server/unit.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -782,8 +804,15 @@ field.o: ../heroes_server/field.cpp ../heroes_server/field.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QPoint \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QTime \
-		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qdatetime.h
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QtMath \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o field.o ../heroes_server/field.cpp
+
+session.o: ../heroes_server/session.cpp ../heroes_server/session.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o session.o ../heroes_server/session.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

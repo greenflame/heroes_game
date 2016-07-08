@@ -20,8 +20,8 @@ public:
     void addTroop(Troop troop);
 
     void action(QPoint actionMove, QPoint actionAttack, QString &log, QList<QPoint> &motionPath, bool &attackSuccess, int &damage, int &died);
-    void actionMove(QPoint move, QString &log, QList<QPoint> &motionPath);
-    void actionAttack(QPoint actionAttack, QString &log, bool &attackSuccess, int &damage, int &died);
+    void actionMove(QPoint destination, QString &log, QList<QPoint> &motionPath);
+    void actionAttack(QPoint aim, QString &log, bool &attackSuccess, int &damage, int &died);
 
     bool isGameEnd() const;
 
@@ -37,14 +37,11 @@ private:
 
     void regenerateActionQueue();
     void updateActionQueue();
-    void checkForDeath();
+    void checkForDeath();   // Troops + queue
 
     void loadFromFile(QString fileName);
     bool cellExists(QPoint cell);
     static QPoint validatePoint(QPoint p, QSize s);
-
-    void moveTroop(Troop &troop, QPoint destination, QString &log, QList<QPoint> &motionPath);
-
 
     QSize size;
     QList<Troop> troops;

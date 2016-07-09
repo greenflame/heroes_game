@@ -208,6 +208,21 @@ Troop closestEnemy(Point position) {
     return aim;
 }
 
+Troop closestEnemy(Point position, Attack type) {
+    Troop aim = troops[enemyTroops[0]];
+
+    for (int i = 1; i < enemyTroops.size(); i++) {
+        Troop curAim = troops[enemyTroops[i]];
+        if (curAim.attack_type == type &&
+                (position - curAim.position).mLength() <
+                (position - aim.position).mLength()) {
+            aim = curAim;
+        }
+    }
+
+    return aim;
+}
+
 int main() {
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
@@ -219,7 +234,7 @@ int main() {
 
     if (curTroop.unit.attack_type == DISTANT) {   // Distant
         move = curTroop.position;
-        attack = closestEnemy(curTroop.position).position;
+        attack = closestEnemy(curTroop.position, DISTANT).position;
     } else {    // Melee
         move = closestEnemy(curTroop.position).position;
         attack = closestEnemy(curTroop.position).position;

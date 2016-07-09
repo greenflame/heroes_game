@@ -36,6 +36,9 @@ public slots:
     void on_actionStop_triggered();
     void on_actionPlay_fast_10_games_triggered();
 
+    QString programm1();
+    QString programm2();
+
     void sleep(int msecs);
 
 private:

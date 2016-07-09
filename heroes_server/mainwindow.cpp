@@ -20,8 +20,8 @@ void MainWindow::on_actionStart_triggered()
     stop = false;
 
     Session s(path + "field.txt",
-              ui->lineEdit_programm_1->text(),
-              ui->lineEdit_programm_2->text(),
+              programm1(),
+              programm2(),
               path + "pictures/",
               this);
 
@@ -54,8 +54,8 @@ void MainWindow::on_actionPlay_fast_10_games_triggered()
     for (int i = 0; i < 10; i++)
     {
         Session s(path + "field.txt",
-                  ui->lineEdit_programm_1->text(),
-                  ui->lineEdit_programm_2->text(),
+                  programm1(),
+                  programm2(),
                   path + "pictures/",
                   this);
 
@@ -77,9 +77,33 @@ void MainWindow::on_actionPlay_fast_10_games_triggered()
         if (stop) { break; }
     }
 
-    ui->textEdit_log->append(QString("First: %1, second: %2.")
+    ui->textEdit_log->append(QString("First player score: %1. Second player score: %2.")
                               .arg(results[FIRST_PALYER])
-                              .arg(results[SECOND_PLAYER]));
+                             .arg(results[SECOND_PLAYER]));
+}
+
+QString MainWindow::programm1()
+{
+    QString result = ui->lineEdit_defPath->text() + ui->lineEdit_programm_1->text();
+
+    if (ui->checkBox_mono_1->isChecked())
+    {
+        result = ui->lineEdit_monoPath->text() + " " + result;
+    }
+
+    return result;
+}
+
+QString MainWindow::programm2()
+{
+    QString result = ui->lineEdit_defPath->text() + ui->lineEdit_programm_2->text();
+
+    if (ui->checkBox_mono_2->isChecked())
+    {
+        result = ui->lineEdit_monoPath->text() + " " + result;
+    }
+
+    return result;
 }
 
 void MainWindow::sleep(int msecs)

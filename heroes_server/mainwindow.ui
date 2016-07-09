@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout" stretch="7,3">
+   <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="7,3">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout" stretch="8,0,2">
       <item>
@@ -56,11 +56,22 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_programm_1">
-        <property name="text">
-         <string>/Users/Alexander/Desktop/heroes_game/data_folder/opponent</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLineEdit" name="lineEdit_programm_1">
+          <property name="text">
+           <string>alex</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_mono_1">
+          <property name="text">
+           <string>Mono</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QLabel" name="label_4">
@@ -70,9 +81,54 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_programm_2">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLineEdit" name="lineEdit_programm_2">
+          <property name="text">
+           <string>anton</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_mono_2">
+          <property name="text">
+           <string>Mono</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="tristate">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>/Users/Alexander/Desktop/heroes_game/data_folder/strategy_1</string>
+         <string>Default path:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_defPath">
+        <property name="text">
+         <string>/Users/Alexander/Desktop/heroes_game/data_folder/</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Mono path:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_monoPath">
+        <property name="text">
+         <string>/usr/local/Cellar/mono/4.2.3.4/bin/mono</string>
         </property>
        </widget>
       </item>

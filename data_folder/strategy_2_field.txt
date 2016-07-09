@@ -1,0 +1,21 @@
+second, 13, 0, Pikeman, 50
+second, 13, 1, Pikeman, 50
+second, 13, 2, Pikeman, 50
+second, 13, 3, Pikeman, 50
+second, 13, 4, Pikeman, 50
+second, 13, 5, Pikeman, 50
+second, 13, 6, Pikeman, 50
+second, 13, 7, Pikeman, 50
+second, 13, 8, Pikeman, 50
+second, 13, 9, Pikeman, 50
+
+second, 14, 0, Archer, 20
+second, 14, 1, Archer, 20
+second, 14, 2, Archer, 20
+second, 14, 3, Archer, 20
+second, 14, 4, Archer, 20
+second, 14, 5, Archer, 20
+second, 14, 6, Archer, 20
+second, 14, 7, Archer, 20
+second, 14, 8, Archer, 20
+second, 14, 9, Archer, 20

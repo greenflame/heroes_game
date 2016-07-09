@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -34,16 +35,24 @@ public:
     QAction *actionStop;
     QAction *actionPlay_fast_10_games;
     QWidget *centralWidget;
-    QHBoxLayout *horizontalLayout;
+    QHBoxLayout *horizontalLayout_3;
     QVBoxLayout *verticalLayout;
     QLabel *label;
     QLabel *label_5;
     QTextEdit *textEdit_log;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_3;
+    QHBoxLayout *horizontalLayout;
     QLineEdit *lineEdit_programm_1;
+    QCheckBox *checkBox_mono_1;
     QLabel *label_4;
+    QHBoxLayout *horizontalLayout_2;
     QLineEdit *lineEdit_programm_2;
+    QCheckBox *checkBox_mono_2;
+    QLabel *label_6;
+    QLineEdit *lineEdit_defPath;
+    QLabel *label_7;
+    QLineEdit *lineEdit_monoPath;
     QLabel *label_2;
     QTextEdit *textEdit_info;
     QMenuBar *menuBar;
@@ -64,10 +73,10 @@ public:
         actionPlay_fast_10_games->setObjectName(QStringLiteral("actionPlay_fast_10_games"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        horizontalLayout = new QHBoxLayout(centralWidget);
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout_3 = new QHBoxLayout(centralWidget);
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
@@ -91,7 +100,7 @@ public:
         verticalLayout->setStretch(0, 8);
         verticalLayout->setStretch(2, 2);
 
-        horizontalLayout->addLayout(verticalLayout);
+        horizontalLayout_3->addLayout(verticalLayout);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
@@ -101,20 +110,64 @@ public:
 
         verticalLayout_2->addWidget(label_3);
 
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         lineEdit_programm_1 = new QLineEdit(centralWidget);
         lineEdit_programm_1->setObjectName(QStringLiteral("lineEdit_programm_1"));
 
-        verticalLayout_2->addWidget(lineEdit_programm_1);
+        horizontalLayout->addWidget(lineEdit_programm_1);
+
+        checkBox_mono_1 = new QCheckBox(centralWidget);
+        checkBox_mono_1->setObjectName(QStringLiteral("checkBox_mono_1"));
+
+        horizontalLayout->addWidget(checkBox_mono_1);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
 
         label_4 = new QLabel(centralWidget);
         label_4->setObjectName(QStringLiteral("label_4"));
 
         verticalLayout_2->addWidget(label_4);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         lineEdit_programm_2 = new QLineEdit(centralWidget);
         lineEdit_programm_2->setObjectName(QStringLiteral("lineEdit_programm_2"));
 
-        verticalLayout_2->addWidget(lineEdit_programm_2);
+        horizontalLayout_2->addWidget(lineEdit_programm_2);
+
+        checkBox_mono_2 = new QCheckBox(centralWidget);
+        checkBox_mono_2->setObjectName(QStringLiteral("checkBox_mono_2"));
+        checkBox_mono_2->setChecked(true);
+        checkBox_mono_2->setTristate(false);
+
+        horizontalLayout_2->addWidget(checkBox_mono_2);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_2);
+
+        label_6 = new QLabel(centralWidget);
+        label_6->setObjectName(QStringLiteral("label_6"));
+
+        verticalLayout_2->addWidget(label_6);
+
+        lineEdit_defPath = new QLineEdit(centralWidget);
+        lineEdit_defPath->setObjectName(QStringLiteral("lineEdit_defPath"));
+
+        verticalLayout_2->addWidget(lineEdit_defPath);
+
+        label_7 = new QLabel(centralWidget);
+        label_7->setObjectName(QStringLiteral("label_7"));
+
+        verticalLayout_2->addWidget(label_7);
+
+        lineEdit_monoPath = new QLineEdit(centralWidget);
+        lineEdit_monoPath->setObjectName(QStringLiteral("lineEdit_monoPath"));
+
+        verticalLayout_2->addWidget(lineEdit_monoPath);
 
         label_2 = new QLabel(centralWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
@@ -131,10 +184,10 @@ public:
         verticalLayout_2->addWidget(textEdit_info);
 
 
-        horizontalLayout->addLayout(verticalLayout_2);
+        horizontalLayout_3->addLayout(verticalLayout_2);
 
-        horizontalLayout->setStretch(0, 7);
-        horizontalLayout->setStretch(1, 3);
+        horizontalLayout_3->setStretch(0, 7);
+        horizontalLayout_3->setStretch(1, 3);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -164,9 +217,15 @@ public:
         label->setText(QApplication::translate("MainWindow", "TextLabel", 0));
         label_5->setText(QApplication::translate("MainWindow", "Log:", 0));
         label_3->setText(QApplication::translate("MainWindow", "First programm(green):", 0));
-        lineEdit_programm_1->setText(QApplication::translate("MainWindow", "/Users/Alexander/Desktop/heroes_game/data_folder/opponent", 0));
+        lineEdit_programm_1->setText(QApplication::translate("MainWindow", "alex", 0));
+        checkBox_mono_1->setText(QApplication::translate("MainWindow", "Mono", 0));
         label_4->setText(QApplication::translate("MainWindow", "Second programm(red):", 0));
-        lineEdit_programm_2->setText(QApplication::translate("MainWindow", "/Users/Alexander/Desktop/heroes_game/data_folder/strategy_1", 0));
+        lineEdit_programm_2->setText(QApplication::translate("MainWindow", "anton", 0));
+        checkBox_mono_2->setText(QApplication::translate("MainWindow", "Mono", 0));
+        label_6->setText(QApplication::translate("MainWindow", "Default path:", 0));
+        lineEdit_defPath->setText(QApplication::translate("MainWindow", "/Users/Alexander/Desktop/heroes_game/data_folder/", 0));
+        label_7->setText(QApplication::translate("MainWindow", "Mono path:", 0));
+        lineEdit_monoPath->setText(QApplication::translate("MainWindow", "/usr/local/Cellar/mono/4.2.3.4/bin/mono", 0));
         label_2->setText(QApplication::translate("MainWindow", "Troops info:", 0));
         menuDraw_test->setTitle(QApplication::translate("MainWindow", "Game", 0));
     } // retranslateUi

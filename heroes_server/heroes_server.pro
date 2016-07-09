@@ -26,3 +26,5 @@ HEADERS  += mainwindow.h \
     session.h
 
 FORMS    += mainwindow.ui
+
+DISTFILES +=

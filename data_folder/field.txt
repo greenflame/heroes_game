@@ -1,6 +1,12 @@
-
-first, 0, 3, Pikeman, 500
 first, 0, 5, Archer, 200
+first, 1, 5, Pikeman, 500
 
-second, 14, 3, Pikeman, 500
-second, 14, 5, Archer, 200
+
+
+second, 14, 0, Archer, 40
+second, 14, 1, Archer, 40
+second, 14, 2, Archer, 40
+second, 14, 3, Archer, 40
+second, 14, 4, Archer, 40
+second, 14, 5, Archer, 40
+second, 14, 6, Archer, 40
